@@ -6,7 +6,7 @@
 /*   By: elemarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 14:20:32 by elemarch          #+#    #+#             */
-/*   Updated: 2017/04/12 16:25:28 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/12 16:27:47 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ void		*realloc(void *ptr, size_t size)
 		new_zone = realloc_exec(ptr, size);
 	return (new_zone);
 }
->>>>>>> origin/elemarch
