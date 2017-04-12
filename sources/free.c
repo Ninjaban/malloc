@@ -6,7 +6,7 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:18:41 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/12 15:50:22 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/12 15:55:56 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t	*ft_zone_size(t_head plage, void *ptr)
 	t_zone	*zone;
 
 	if (!plage)
-		return (NULL);
+		return (NULL); // ERROR
 	zone = plage->zones;
 	while (zone)
 	{
@@ -36,8 +36,7 @@ size_t	*ft_zone_size(t_head plage, void *ptr)
 			return (zone->size);
 		zone = zone->next;
 	}
-	INVALID_ADRESS;
-	return (NULL);
+	return (NULL); // INVALID_ADRESS
 }
 
 /*
@@ -68,7 +67,7 @@ t_head	*ft_find_plage(void *ptr)
 		}
 		plage = plage->next;
 	}
-	return (NULL);
+	return (NULL); // INVALID_ADRESS
 }
 
 /*
@@ -89,7 +88,7 @@ void	ft_relink_zone(t_head plage, void *ptr)
 	t_zone	*zone;
 
 	if (!plage)
-		return (NULL);
+		return (NULL); // ERROR
 	zone = plage->zones;
 	prev = NULL;
 	while (zone)
@@ -97,10 +96,7 @@ void	ft_relink_zone(t_head plage, void *ptr)
 		if (zone->addr == ptr)
 		{
 			next = zone->next;
-			if (prev)
-				prev->next = next;
-			else
-				plage->zones = next;
+			(prev ? prev->next : plage->zones) = next;
 			zone->addr = NULL;
 			zone->size = 0;
 			zone->next = NULL;
@@ -109,7 +105,7 @@ void	ft_relink_zone(t_head plage, void *ptr)
 		prev = zone;
 		zone = zone->next;
 	}
-	INVALID_ADRESS;
+	// INVALID_ADRESS;
 }
 
 /*
@@ -169,7 +165,7 @@ void	free(void *ptr)
 	if (!ptr)
 		return ;
 	if (!(plage = ft_find_plage(ptr)))
-		INVALID_ADDRESS;
+		return ; // INVALID_ADRESS
 	ft_relink_zone(plage, ptr);
 	size = ft_zone_size(ptr);
 	n = 0;
@@ -182,7 +178,7 @@ void	free(void *ptr)
 	{
 		ft_relink_plage(plage);
 		if (munmap(plage, sz) == -1)
-			MUNMAP_ERROR;
+			return ; // MUNMAP_ERROR
 		plage = NULL;
 	}
 }
