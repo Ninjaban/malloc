@@ -1,0 +1,17 @@
+/*
+** Fonctions autorisees :
+**
+** mmap(2)			: reclamer des zones memoire au systeme
+** munmap(2)		: rendre des zones memoire au systeme
+** getpagesize(3)
+** getrlimit(2)
+** fonctions autorisees libft (sauf free et malloc)
+** fonctions de la libpthread
+*/
+
+/*
+** DEFINES :: PAGE_SIZES
+** 	TINY		ta <= sz		1 a n octets			zone de N octets
+** 	SMALL		ta <= sz*4		(n + 1) a m octets		zone de M octets
+** 	LARGE		ta <= sz*100	(m + 1) octets et plus	stockes hors zone (mmap())
+*/
