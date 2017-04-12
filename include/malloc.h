@@ -48,7 +48,7 @@
 # define HEADER		8
 # define TINY_ZONE	sz
 # define SMALL_ZONE	TINY_ZONE * 100
-# define TINY_MAX	((TINY_ZONE - HEADER * 2) / 100) - 8
+# define TINY_MAX	((TINY_ZONE - HEADER * 2) / 100)
 # define SMALL_MAX	TINY_ZONE
 
 /*
@@ -62,15 +62,48 @@
 
 typedef struct		s_mem
 {
-	void			*addr;
 	int				sz;
+	void			*addr;
 }					t_mem;
 
+/*
+ * STRUCTURE :: zone
+ *  Structure contenant l'addresse et la taille d'une zone mémoire allouée
+ *
+ * VARIABLES
+ *	void*			addr		addresse du début de la mémoirev réservée
+ *	int				size		taille de la zone
+ *	void*			next		addresse de la prochaine structure
+ */
+
+typedef struct		s_zone
+{
+	void			*addr;
+	size_t			len;
+	void			*next;
+}					t_zone;
+
+/*
+ * STRUCTURE :: head
+ *  Structure stockée dans le header de chaque plage mémoire réservée
+ *
+ * VARIABLES
+ *	void*			next		addresse du début de la mémoire réservée
+ *	int				size		taille de la zone
+ *	t_zone*			zones		lien vers la liste des zones mémoires réservées
+ */
+
+typedef struct		s_head
+{
+	void			*next;
+	size_t			size;
+	t_zone			*zones;
+}					t_head;
 /*
 ** PROTOTYPES
 */
 
-t_mem				ft_mem_init(void);
+t_mem				*ft_mem_init(void);
 void				free(void *ptr);
 void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
