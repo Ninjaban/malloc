@@ -79,7 +79,7 @@ typedef struct		s_mem
 typedef struct		s_zone
 {
 	void			*addr;
-	size_t			len;
+	size_t			size;
 	void			*next;
 }					t_zone;
 
