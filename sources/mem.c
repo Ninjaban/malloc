@@ -12,6 +12,26 @@
 
 #include "malloc.h"
 
+t_zone		*ft_mem_get_zone(void *addr)
+{
+	t_head	*sheet;
+	t_zone	*current;
+
+	if (addr == NULL)
+		return (NULL);
+	sheet = (t_head)g_mem->addr;
+	while (sheet)
+	{
+		current = sheet->zones;
+		while (current && current->addr != addr)
+			current = current->next;
+		if (current)
+			return (current);
+		sheet = sheet->next;
+	}
+	return (NULL);
+}
+
 /*
 ** FONCTION :: ft_mem_get_size
 **  Renvoie la taille de la zone mémoire pointée
@@ -23,24 +43,15 @@
 **  renvoie 0 si la zone est free ou inexistante, renvoie sa taille sinon.
 */
 
-size_t		*ft_mem_get_size(void *addr)
+size_t		ft_mem_get_size(void *addr)
 {
-	t_head	*sheet;
-	t_zone	*current;
+	t_zone	zone;
 
-	if (addr == NULL)
+	zone = ft_mem_get_zone(addr);
+	if (zone)
+		return (zone->size);
+	else
 		return (0);
-	sheet = (t_head)g_mem->addr;
-	while (sheet)
-	{
-		current = sheet->zones;
-		while (current && current->addr != addr)
-			current = current->next;
-		if (current)
-			return (current->size);
-		sheet = sheet->next;
-	}
-	return (0);
 }
 
 //initialise la variable globale
