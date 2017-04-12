@@ -1,17 +1,23 @@
 /*
 ** Fonctions autorisees :
 **
-** mmap(2)			: reclamer des zones memoire au systeme
-** munmap(2)		: rendre des zones memoire au systeme
-** getpagesize(3)
-** getrlimit(2)
+** void *mmap(void *addr, size_t len, int prot, int flags, int fd, off_t offset) (2)
+** 	reclamer des zones memoire au systeme
+** int munmap(void *addr, size_t len) (2)
+** 	rendre des zones memoire au systeme
+** int getpagesize() (3)
+** 	nombre de bytes de la page
+** int getrlimit(int resource, struct rlimit *rlim) (2)
+** 	recupere les limites de consommation d'une ressource
 ** fonctions autorisees libft (sauf free et malloc)
 ** fonctions de la libpthread
 */
 
-/*
-** DEFINES :: PAGE_SIZES
-** 	TINY		ta <= sz		1 a n octets			zone de N octets
-** 	SMALL		ta <= sz*4		(n + 1) a m octets		zone de M octets
-** 	LARGE		ta <= sz*100	(m + 1) octets et plus	stockes hors zone (mmap())
-*/
+PAGE1_HEAD = page_start - HEADER > pointeur glob
+	t_head page : next, size, zone
+		t_zone zone : addr, len, next
+zone1
+zone2
+...
+PAGE1_END = page_start + sz (- HEADER ?)
+	-> addr PAGE2_HEAD
