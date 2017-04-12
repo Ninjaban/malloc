@@ -6,7 +6,7 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:18:41 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/12 16:48:43 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/12 16:58:36 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ size_t	*ft_zone_size(t_head plage, void *ptr)
 			return (zone->size);
 		zone = zone->next;
 	}
-	return (NULL); // INVALID_ADRESS
+	return (NULL); // INVALID_ADDRESS
 }
 
 /*
@@ -67,7 +67,7 @@ t_head	*ft_find_plage(void *ptr)
 		}
 		plage = plage->next;
 	}
-	return (NULL); // INVALID_ADRESS
+	return (NULL); // INVALID_ADDRESS
 }
 
 /*
@@ -105,11 +105,11 @@ void	ft_relink_zone(t_head plage, void *ptr)
 		prev = zone;
 		zone = zone->next;
 	}
-	// INVALID_ADRESS;
+	// INVALID_ADDRESS;
 }
 
 /*
-** void ft_plage_zone(t_head *ptr)
+** void ft_relink_plage(t_head *ptr)
 **
 ** Variables :
 ** ptr		: plage a trouver
@@ -165,7 +165,7 @@ void	free(void *ptr)
 	if (!ptr)
 		return ;
 	if (!(plage = ft_find_plage(ptr)))
-		return ; // INVALID_ADRESS
+		return ; // INVALID_ADDRESS
 	size = ft_zone_size(ptr);
 	ft_relink_zone(plage, ptr);
 	n = 0;
