@@ -10,14 +10,17 @@
 ** int getrlimit(int resource, struct rlimit *rlim) (2)
 ** 	recupere les limites de consommation d'une ressource
 ** fonctions autorisees libft (sauf free et malloc)
-** fonctions de la libpthread
+** <pthread.h>
 */
 
-PAGE1_HEAD = page_start - HEADER > pointeur glob
-	t_head page : next, size, zone
-		t_zone zone : addr, len, next
+PLAGE = ce qu'on alloue
+PAGE = alloue par mmap = 4096
+
+PLAGE1_HEAD > pointeur glob
+	t_head page : next, size (sans header), zone
+		t_zone zone : addr, size, next
 zone1
 zone2
 ...
-PAGE1_END = page_start + sz (- HEADER ?)
+PLAGE1_END = page_start + sz (- HEADER ?)
 	-> addr PAGE2_HEAD

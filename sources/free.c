@@ -6,72 +6,183 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:18:41 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/12 13:59:36 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/12 15:50:22 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 /*
+** size_t *ft_zone_size(t_head plage, void *ptr)
+**
+** Variables :
+** ptr		: zone a trouver
+** plage	: adresse de la plage contenant la zone
+**
+** Description :
+** Renvoie la taille de la zone.
+*/
+
+size_t	*ft_zone_size(t_head plage, void *ptr)
+{
+	t_zone	*zone;
+
+	if (!plage)
+		return (NULL);
+	zone = plage->zones;
+	while (zone)
+	{
+		if (zone->addr == ptr)
+			return (zone->size);
+		zone = zone->next;
+	}
+	INVALID_ADRESS;
+	return (NULL);
+}
+
+/*
+** t_head *ft_find_plage(void *ptr)
+**
+** Variables :
+** ptr		: zone a trouver
+** g_mem	: informations sur la premiere plage
+**
+** Description :
+** Trouve la plage correspondant a l'adresse recherchee.
+*/
+
+t_head	*ft_find_plage(void *ptr)
+{
+	t_head	*plage;
+	t_zone	*zone;
+
+	plage = (t_head *)(g_mem->addr);
+	while (plage)
+	{
+		zone = plage->zones;
+		while (zone)
+		{
+			if (zone->addr == ptr)
+				return (plage);
+			zone = zone->next;
+		}
+		plage = plage->next;
+	}
+	return (NULL);
+}
+
+/*
+** void ft_relink_zone(t_head *plage, void *ptr)
+**
+** Variables :
+** ptr		: zone a trouver
+** plage	: adresse de la plage contenant la zone
+**
+** Description :
+** retire la zone de la liste
+*/
+
+void	ft_relink_zone(t_head plage, void *ptr)
+{
+	t_zone	*prev;
+	t_zone	*next;
+	t_zone	*zone;
+
+	if (!plage)
+		return (NULL);
+	zone = plage->zones;
+	prev = NULL;
+	while (zone)
+	{
+		if (zone->addr == ptr)
+		{
+			next = zone->next;
+			if (prev)
+				prev->next = next;
+			else
+				plage->zones = next;
+			zone->addr = NULL;
+			zone->size = 0;
+			zone->next = NULL;
+			return ;
+		}
+		prev = zone;
+		zone = zone->next;
+	}
+	INVALID_ADRESS;
+}
+
+/*
+** void ft_plage_zone(t_head *ptr)
+**
+** Variables :
+** ptr		: plage a trouver
+** g_mem	: informations sur la premiere plage
+**
+** Description :
+** retire la plage de la liste
+*/
+
+void	ft_relink_plage(t_head *ptr)
+{
+	t_head	*plage;
+
+	plage = (t_head *)(g_mem->addr);
+	prev = NULL;
+	while (zone)
+	{
+		if (plage == ptr)
+		{
+			next = plage->next;
+			if (prev)
+				prev->next = next;
+			else
+				g_mem->addr = (void *)next;
+			plage->next = NULL;
+			plage->size = 0;
+			plage->zones = NULL;
+			return ;
+		}
+		prev = plage;
+		plage = plage->next;
+	}
+}
+
+/*
 ** void free(void *ptr)
 **
 ** Variables :
-** ptr	: pointeur vers l'adresse a liberer
+** ptr	: adresse a liberer
 **
 ** Description :
 ** Libere l'allocation de la memoire allouee  pointee par "ptr" et la set a 0.
 ** Si "ptr" vaut NULL, ne fait rien.
-*/
-
-/*
-** Fonctions appelees :
-** int ft_GETLASIZE(void *addr)
-** 	renvoie la taille de memoire allouee a l'adresse "ptr"
 **
-** int munmap(void *addr, size_t len)
-** 	<sys/mman.h>
-** 	success : 0 ; falure : -1, set errno
-** 	"addr" must be a multiple of the page size
-** 	"len" is the length of the mapping in bytes ?
 */
-
-int		ft_empty_page(void *addr) // debut ? header ?
-{
-	size_t	n;
-
-	n = 0;
-	while (DANS_LA_PAGE) // n < sz ?
-	{
-		if (val != 0)
-			return (FALSE);
-		n++;
-	}
-	return (TRUE);
-}
 
 void	free(void *ptr)
 {
-	size_t	len; // n'inclut pas le header
+	size_t	size;
 	size_t	n;
-	void	*page;
-	int		sz; // = getpagesize() ?
+	t_head	*plage;
 
 	if (!ptr)
 		return ;
-	len = ft_GETLASIZE(ptr);
-	link_prev_next_zone();
-	set_ptr_header_to_0();
+	if (!(plage = ft_find_plage(ptr)))
+		INVALID_ADDRESS;
+	ft_relink_zone(plage, ptr);
+	size = ft_zone_size(ptr);
 	n = 0;
-	while (n < len)
+	while (n < size)
 	{
 		ptr[n] = 0;
 		n++;
 	}
-	if (ft_empty_page(page))
+	if (ft_empty_plage(plage))
 	{
-		link_prev_next_page(page);
-		set_page_header_to_0(page);
-		set_page_end_to_0(page);
-		munmap(page, sz);
+		ft_relink_plage(plage);
+		if (munmap(plage, sz) == -1)
+			MUNMAP_ERROR;
+		plage = NULL;
 	}
 }
