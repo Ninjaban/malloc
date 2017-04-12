@@ -26,25 +26,60 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <sysmman.h>
+
+/*
+** DEFINES :: BASICS
+**  TRUE/FALSE		valeurs 1 et 0
+*/
+
+# define TRUE		1
+# define FALSE		0
 
 /*
 ** DEFINES :: PAGE_SIZES
-** 	TINY		ta <= sz
-** 	SMALL		ta <= sz*4
-** 	LARGE		ta <= sz*100
+**  HEADER			sizeof(void*). Taille des zones réservées
+**  TINY_ZONE		zone minimum lors des appels de mamalloc
+**  SMALL_ZONE		zone minimum lorsqu'une taille est supérieure à TINY_MAX
+**  TINY_MAX		taille maximum d'un TINY pour une allocation de TINY_ZONE
+**  SMALL_MAX		taille maximum d'un SMALL pour une allocation de SMALL_ZONE
 */
 
-# define TINY	1
-# define SMALL	4
-# define LARGE	100
+# define HEADER		8
+# define TINY_ZONE	sz
+# define SMALL_ZONE	TINY_ZONE * 100
+# define TINY_MAX	((TINY_ZONE - HEADER * 2) / 100) - 8
+# define SMALL_MAX	TINY_ZONE
+
+/*
+ * STRUCTURE :: sys
+ *  Structure d'information utilisée par toute la lib
+ *
+ * VARIABLES
+ *	void*			addr		addresse du début de la mémoire réservée
+ *	int				sz			retour de getpagesize()
+ */
+
+typedef struct		s_mem
+{
+	void			*addr;
+	int				sz;
+}					t_mem;
 
 /*
 ** PROTOTYPES
 */
 
-void			free(void *ptr);
-void			*malloc(size_t size);
-void			*realloc(void *ptr, size_t size);
-void			show_alloc_mem();
+t_mem				ft_mem_init(void);
+void				free(void *ptr);
+void				*malloc(size_t size);
+void				*realloc(void *ptr, size_t size);
+void				show_alloc_mem();
+
+/*
+** GLOBAL
+*/
+
+extern t_mem		*g_mem;
 
 #endif
