@@ -114,7 +114,7 @@ t_zone				*ft_mem_get_zone(void *addr);
 size_t				ft_mem_get_size(void *addr);
 t_mem				*ft_mem_init(void);
 void				free(void *ptr);
-void				*malloc(size_t size);
+void				*ft_malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
 void				show_alloc_mem();
 
