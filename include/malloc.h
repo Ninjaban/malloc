@@ -26,7 +26,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <sysmman.h>
+# include <sys/mman.h>
 
 /*
 ** DEFINES :: BASICS
