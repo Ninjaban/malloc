@@ -6,7 +6,7 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:18:41 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/12 15:55:56 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/12 16:48:43 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,15 +166,15 @@ void	free(void *ptr)
 		return ;
 	if (!(plage = ft_find_plage(ptr)))
 		return ; // INVALID_ADRESS
-	ft_relink_zone(plage, ptr);
 	size = ft_zone_size(ptr);
+	ft_relink_zone(plage, ptr);
 	n = 0;
 	while (n < size)
 	{
 		ptr[n] = 0;
 		n++;
 	}
-	if (ft_empty_plage(plage))
+	if (!(plage->zones))
 	{
 		ft_relink_plage(plage);
 		if (munmap(plage, sz) == -1)
