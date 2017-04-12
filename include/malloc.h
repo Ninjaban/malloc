@@ -72,7 +72,8 @@ typedef struct		s_zone
 
 typedef struct		s_head
 {
-	void			*next;
+	void			*addr;
+	struct s_head	*next;
 	size_t			size;
 	t_zone			*zones;
 }					t_head;
@@ -109,6 +110,8 @@ extern t_mem		*g_mem;
 ** PROTOTYPES
 */
 
+t_zone				*ft_mem_get_zone(void *addr);
+size_t				ft_mem_get_size(void *addr);
 t_mem				*ft_mem_init(void);
 void				free(void *ptr);
 void				*malloc(size_t size);
