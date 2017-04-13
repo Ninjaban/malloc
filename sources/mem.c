@@ -19,7 +19,7 @@ t_zone		*ft_mem_get_zone(void *addr)
 
 	if (addr == NULL)
 		return (NULL);
-	sheet = (t_head)g_mem->addr;
+	sheet = ((t_head *)g_mem)->addr;
 	while (sheet)
 	{
 		current = sheet->zones;
@@ -45,7 +45,7 @@ t_zone		*ft_mem_get_zone(void *addr)
 
 size_t		ft_mem_get_size(void *addr)
 {
-	t_zone	zone;
+	t_zone	*zone;
 
 	zone = ft_mem_get_zone(addr);
 	if (zone)
