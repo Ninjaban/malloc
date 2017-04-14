@@ -69,6 +69,9 @@ static void		*ft_newhead(void *addr, size_t size, size_t zonelen)
 	head->size = size;
 	head->next = NULL;
 	head->zones = ft_newzone(addr + sizeof(t_head), addr + HEADER, zonelen);
+	printf("head size : %zu\n", head->size);
+	printf("t_zone : %zu\n", sizeof(t_zone));
+	printf("t_head : %zu\n", sizeof(t_head));
 	printf("START : %p\n", head);
 	printf("END : %p\n", head + head->size);
 	if (g_mem->addr)
@@ -87,6 +90,10 @@ static void		ft_structzone(t_zone *ztmp, void *ptr, size_t len)
 {
 	t_zone		*zone;
 
+	printf("ZONE PREV : %zu\n", ztmp);
+	printf("ZONE NEXT : %zu\n", ztmp + sizeof(t_zone));
+	printf("ZONE NEXT : %zu\n", ztmp + 1);
+	printf("T_ZONE : %zu\n", sizeof(t_zone));
 	zone = ft_newzone(ztmp + sizeof(t_zone), ptr, len);
 	zone->next = ztmp->next;
 	ztmp->next = zone;
