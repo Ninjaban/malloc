@@ -19,7 +19,7 @@ t_zone		*ft_mem_get_zone(void *addr)
 
 	if (addr == NULL)
 		return (NULL);
-	sheet = ((t_head *)g_mem)->addr;
+	sheet = g_mem->addr;
 	while (sheet)
 	{
 		current = sheet->zones;
@@ -57,9 +57,11 @@ size_t		ft_mem_get_size(void *addr)
 //initialise la variable globale
 t_mem		*ft_mem_init(void)
 {
-	t_mem	mem;
+	t_mem	*mem;
 
-	mem.addr = NULL;
-	mem.sz = getpagesize();
-	return (&mem);
+	mem = mmap(0, (size_t)getpagesize(), PROT_READ | PROT_WRITE,
+			   MAP_PRIVATE | MAP_ANON, -1, 0);
+	mem->addr = NULL;
+	mem->sz = getpagesize();
+	return (mem);
 }
