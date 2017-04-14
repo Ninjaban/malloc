@@ -6,18 +6,18 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:18:41 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/14 14:20:38 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/14 14:25:35 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 /*
-** size_t *ft_zone_size(t_head plage, void *ptr)
+** size_t *ft_zone_size(t_head *plage, void *ptr)
 **
 ** Variables :
 ** ptr		: zone a trouver
-** plage	: adresse de la plage contenant la zone
+** plage	: plage contenant la zone
 **
 ** Description :
 ** Renvoie la taille de la zone.
@@ -75,7 +75,7 @@ static t_head	*ft_find_plage(void *ptr)
 **
 ** Variables :
 ** ptr		: zone a trouver
-** plage	: adresse de la plage contenant la zone
+** plage	: plage contenant la zone
 **
 ** Description :
 ** retire la zone de la liste
@@ -148,7 +148,8 @@ static void		ft_relink_plage(t_head *ptr)
 ** ptr	: adresse a liberer
 **
 ** Description :
-** Libere l'allocation de la memoire allouee  pointee par "ptr" et la set a 0.
+** Set la memoire allouee a ptr a 0 et supprime le header correspondant
+** Si la plage est vide, rend la zone memoire correspondante au systeme
 ** Si "ptr" vaut NULL, ne fait rien.
 */
 
