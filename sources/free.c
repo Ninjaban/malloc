@@ -6,7 +6,7 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:18:41 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/14 12:16:30 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/14 14:20:38 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ** Renvoie la taille de la zone.
 */
 
-static size_t	ft_zone_size(t_head plage, void *ptr)
+static size_t	ft_zone_size(t_head *plage, void *ptr)
 {
 	t_zone		*zone;
 
@@ -81,7 +81,7 @@ static t_head	*ft_find_plage(void *ptr)
 ** retire la zone de la liste
 */
 
-static void		ft_relink_zone(t_head plage, void *ptr)
+static void		ft_relink_zone(t_head *plage, void *ptr)
 {
 	t_zone		*prev;
 	t_zone		*next;
@@ -118,11 +118,13 @@ static void		ft_relink_zone(t_head plage, void *ptr)
 
 static void		ft_relink_plage(t_head *ptr)
 {
+	t_head		*prev;
+	t_head		*next;
 	t_head		*plage;
 
 	plage = (t_head *)(g_mem->addr);
 	prev = NULL;
-	while (plage && plage != ptr)
+	while (plage && plage->addr && plage->addr != ptr)
 	{
 		prev = plage;
 		plage = plage->next;
