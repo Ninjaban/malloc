@@ -6,7 +6,7 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:18:41 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/14 14:25:35 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/14 15:35:31 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void		ft_relink_zone(t_head *plage, void *ptr)
 	t_zone		*zone;
 
 	if (!plage)
-		return (NULL); // ERROR
+		return ; // ERROR
 	zone = plage->zones;
 	prev = NULL;
 	while (zone && zone->addr != ptr)
@@ -99,7 +99,10 @@ static void		ft_relink_zone(t_head *plage, void *ptr)
 	if (!zone)
 		return ; // INVALID_ADRESS
 	next = zone->next;
-	(prev ? prev->next : plage->zones) = next;
+	if (prev)
+		prev->next = next;
+	else
+		plage->zones = next;
 	zone->addr = NULL;
 	zone->size = 0;
 	zone->next = NULL;
@@ -163,18 +166,18 @@ void			free(void *ptr)
 		return ;
 	if (!(plage = ft_find_plage(ptr)))
 		return ; // INVALID_ADDRESS
-	size = ft_zone_size(ptr);
+	size = ft_zone_size(plage, ptr);
 	ft_relink_zone(plage, ptr);
 	n = 0;
 	while (n < size)
 	{
-		ptr[n] = 0;
+		((char *)ptr)[n] = 0;
 		n++;
 	}
 	if (!(plage->zones))
 	{
 		ft_relink_plage(plage);
-		if (munmap(plage, sz) == -1)
+		if (munmap(plage, getpagesize()) == -1)
 			return ; // MUNMAP_ERROR
 		plage = NULL;
 	}
