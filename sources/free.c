@@ -6,7 +6,7 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:18:41 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/12 16:58:36 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/14 12:16:30 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@
 ** Renvoie la taille de la zone.
 */
 
-size_t	*ft_zone_size(t_head plage, void *ptr)
+static size_t	ft_zone_size(t_head plage, void *ptr)
 {
-	t_zone	*zone;
+	t_zone		*zone;
 
 	if (!plage)
-		return (NULL); // ERROR
+		return (0); // ERROR
 	zone = plage->zones;
 	while (zone)
 	{
 		if (zone->addr == ptr)
-			return (zone->size);
+			return (zone->size); // taille de la zone
 		zone = zone->next;
 	}
-	return (NULL); // INVALID_ADDRESS
+	return (0); // INVALID_ADDRESS
 }
 
 /*
@@ -50,10 +50,10 @@ size_t	*ft_zone_size(t_head plage, void *ptr)
 ** Trouve la plage correspondant a l'adresse recherchee.
 */
 
-t_head	*ft_find_plage(void *ptr)
+static t_head	*ft_find_plage(void *ptr)
 {
-	t_head	*plage;
-	t_zone	*zone;
+	t_head		*plage;
+	t_zone		*zone;
 
 	plage = (t_head *)(g_mem->addr);
 	while (plage)
@@ -62,7 +62,7 @@ t_head	*ft_find_plage(void *ptr)
 		while (zone)
 		{
 			if (zone->addr == ptr)
-				return (plage);
+				return (plage); // plage contenant ptr
 			zone = zone->next;
 		}
 		plage = plage->next;
@@ -81,31 +81,28 @@ t_head	*ft_find_plage(void *ptr)
 ** retire la zone de la liste
 */
 
-void	ft_relink_zone(t_head plage, void *ptr)
+static void		ft_relink_zone(t_head plage, void *ptr)
 {
-	t_zone	*prev;
-	t_zone	*next;
-	t_zone	*zone;
+	t_zone		*prev;
+	t_zone		*next;
+	t_zone		*zone;
 
 	if (!plage)
 		return (NULL); // ERROR
 	zone = plage->zones;
 	prev = NULL;
-	while (zone)
+	while (zone && zone->addr != ptr)
 	{
-		if (zone->addr == ptr)
-		{
-			next = zone->next;
-			(prev ? prev->next : plage->zones) = next;
-			zone->addr = NULL;
-			zone->size = 0;
-			zone->next = NULL;
-			return ;
-		}
 		prev = zone;
 		zone = zone->next;
 	}
-	// INVALID_ADDRESS;
+	if (!zone)
+		return ; // INVALID_ADRESS
+	next = zone->next;
+	(prev ? prev->next : plage->zones) = next;
+	zone->addr = NULL;
+	zone->size = 0;
+	zone->next = NULL;
 }
 
 /*
@@ -119,29 +116,27 @@ void	ft_relink_zone(t_head plage, void *ptr)
 ** retire la plage de la liste
 */
 
-void	ft_relink_plage(t_head *ptr)
+static void		ft_relink_plage(t_head *ptr)
 {
-	t_head	*plage;
+	t_head		*plage;
 
 	plage = (t_head *)(g_mem->addr);
 	prev = NULL;
-	while (zone)
+	while (plage && plage != ptr)
 	{
-		if (plage == ptr)
-		{
-			next = plage->next;
-			if (prev)
-				prev->next = next;
-			else
-				g_mem->addr = (void *)next;
-			plage->next = NULL;
-			plage->size = 0;
-			plage->zones = NULL;
-			return ;
-		}
 		prev = plage;
 		plage = plage->next;
 	}
+	if (!plage)
+		return ; // INVALID_ADRESS
+	next = plage->next;
+	if (prev)
+		prev->next = next;
+	else
+		g_mem->addr = (void *)next;
+	plage->next = NULL;
+	plage->size = 0;
+	plage->zones = NULL;
 }
 
 /*
@@ -153,14 +148,13 @@ void	ft_relink_plage(t_head *ptr)
 ** Description :
 ** Libere l'allocation de la memoire allouee  pointee par "ptr" et la set a 0.
 ** Si "ptr" vaut NULL, ne fait rien.
-**
 */
 
-void	free(void *ptr)
+void			free(void *ptr)
 {
-	size_t	size;
-	size_t	n;
-	t_head	*plage;
+	size_t		size;
+	size_t		n;
+	t_head		*plage;
 
 	if (!ptr)
 		return ;
