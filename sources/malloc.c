@@ -12,13 +12,17 @@
 
 #include "malloc.h"
 
-#include <stdio.h>
-
 t_mem		*g_mem = NULL;
 
 static size_t	ft_getsize(size_t len)
 {
-	return (g_mem->sz * ((len < g_mem->sz) ? 1 : len / g_mem->sz + 1));
+	if (len <= TINY_ZONE)
+		return ((size_t)g_mem->sz);
+	else if (len <= SMALL_ZONE)
+		return ((size_t)g_mem->sz *
+				((SMALL_ZONE * 100 + HEADER) / g_mem->sz + 1));
+	else
+		return ((size_t)g_mem->sz * (((len + HEADER) / (size_t)g_mem->sz) + 1));
 }
 
 static void		*ft_getnextzone(t_head *addr, size_t len)
@@ -26,17 +30,15 @@ static void		*ft_getnextzone(t_head *addr, size_t len)
 	t_zone *zone;
 
 	zone = addr->zones;
-		printf("%zu | %zu\n", addr->size, len);
 	if (addr->size - HEADER >= len)
 		while (zone)
 		{
-			if (zone->next && len <= zone->next->addr -
-											(zone->addr + zone->size))
+			if (zone->next && len <= (size_t)(zone->next->addr -
+											(zone->addr + zone->size)))
 				return (zone->addr + zone->size);
-			else if (!zone->next && len <= ((void *)addr + addr->size) -
-										(zone->addr + zone->size))
+			else if (!zone->next && len <=
+			(size_t)(((void *)addr + addr->size) - (zone->addr + zone->size)))
 			{
-				printf("OK\n");
 				return (zone->addr + zone->size);
 			}
 			zone = zone->next;
@@ -49,7 +51,6 @@ static t_zone	*ft_newzone(void *headaddr, void *addr, size_t size)
 	t_zone		*zone;
 
 	zone = (t_zone *)headaddr;
-	printf("ZONE : %p\n", zone);
 	zone->size = size;
 	zone->addr = addr;
 	zone->next = NULL;
@@ -63,17 +64,10 @@ static void		*ft_newhead(void *addr, size_t size, size_t zonelen)
 
 	static size_t nb = 0;
 	nb = nb + 1;
-//	printf("%zu\n", nb);
-
-	head = (t_head *)addr;
+	head = addr;
 	head->size = size;
 	head->next = NULL;
 	head->zones = ft_newzone(addr + sizeof(t_head), addr + HEADER, zonelen);
-	printf("head size : %zu\n", head->size);
-	printf("t_zone : %zu\n", sizeof(t_zone));
-	printf("t_head : %zu\n", sizeof(t_head));
-	printf("START : %p\n", head);
-	printf("END : %p\n", head + head->size);
 	if (g_mem->addr)
 	{
 		tmp = g_mem->addr;
@@ -90,11 +84,7 @@ static void		ft_structzone(t_zone *ztmp, void *ptr, size_t len)
 {
 	t_zone		*zone;
 
-	printf("ZONE PREV : %zu\n", ztmp);
-	printf("ZONE NEXT : %zu\n", ztmp + sizeof(t_zone));
-	printf("ZONE NEXT : %zu\n", ztmp + 1);
-	printf("T_ZONE : %zu\n", sizeof(t_zone));
-	zone = ft_newzone(ztmp + sizeof(t_zone), ptr, len);
+	zone = ft_newzone(ztmp + 1, ptr, len);
 	zone->next = ztmp->next;
 	ztmp->next = zone;
 }
@@ -108,16 +98,17 @@ static void		ft_addzone(t_head *addr, void *ptr, size_t len)
 	while (tmp)
 	{
 		ztmp = tmp->zones;
-		while (ztmp->addr)
+		while (ztmp)
 		{
 			if (ztmp->addr + ztmp->size == ptr)
 				return ft_structzone(ztmp, ptr, len);
 			ztmp = ztmp->next;
 		}
+		tmp = tmp->next;
 	}
 }
 
-void			*ft_malloc(size_t len)
+void			*malloc(size_t len)
 {
 	void		*addr;
 	void		*plage;

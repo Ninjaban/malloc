@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Users/jcarra/CLion.app/Contents/bin/cmake/bin/cmake
+CMAKE_COMMAND = /home/jonathan/Clion/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /Users/jcarra/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
+RM = /home/jonathan/Clion/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/jcarra/Ninjaban/malloc
+CMAKE_SOURCE_DIR = /home/jonathan/Project/malloc
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/jcarra/Ninjaban/malloc/cmake-build-debug
+CMAKE_BINARY_DIR = /home/jonathan/Project/malloc/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/malloc.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/malloc.dir/flags.make
 
 CMakeFiles/malloc.dir/sources/malloc.c.o: CMakeFiles/malloc.dir/flags.make
 CMakeFiles/malloc.dir/sources/malloc.c.o: ../sources/malloc.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jcarra/Ninjaban/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/malloc.dir/sources/malloc.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/malloc.dir/sources/malloc.c.o   -c /Users/jcarra/Ninjaban/malloc/sources/malloc.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/malloc.dir/sources/malloc.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/malloc.dir/sources/malloc.c.o   -c /home/jonathan/Project/malloc/sources/malloc.c
 
 CMakeFiles/malloc.dir/sources/malloc.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/malloc.dir/sources/malloc.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jcarra/Ninjaban/malloc/sources/malloc.c > CMakeFiles/malloc.dir/sources/malloc.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/jonathan/Project/malloc/sources/malloc.c > CMakeFiles/malloc.dir/sources/malloc.c.i
 
 CMakeFiles/malloc.dir/sources/malloc.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/malloc.dir/sources/malloc.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jcarra/Ninjaban/malloc/sources/malloc.c -o CMakeFiles/malloc.dir/sources/malloc.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jonathan/Project/malloc/sources/malloc.c -o CMakeFiles/malloc.dir/sources/malloc.c.s
 
 CMakeFiles/malloc.dir/sources/malloc.c.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/malloc.dir/sources/malloc.c.o.provides.build: CMakeFiles/malloc.dir/s
 
 CMakeFiles/malloc.dir/sources/mem.c.o: CMakeFiles/malloc.dir/flags.make
 CMakeFiles/malloc.dir/sources/mem.c.o: ../sources/mem.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jcarra/Ninjaban/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/malloc.dir/sources/mem.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/malloc.dir/sources/mem.c.o   -c /Users/jcarra/Ninjaban/malloc/sources/mem.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/malloc.dir/sources/mem.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/malloc.dir/sources/mem.c.o   -c /home/jonathan/Project/malloc/sources/mem.c
 
 CMakeFiles/malloc.dir/sources/mem.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/malloc.dir/sources/mem.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/jcarra/Ninjaban/malloc/sources/mem.c > CMakeFiles/malloc.dir/sources/mem.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/jonathan/Project/malloc/sources/mem.c > CMakeFiles/malloc.dir/sources/mem.c.i
 
 CMakeFiles/malloc.dir/sources/mem.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/malloc.dir/sources/mem.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/jcarra/Ninjaban/malloc/sources/mem.c -o CMakeFiles/malloc.dir/sources/mem.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jonathan/Project/malloc/sources/mem.c -o CMakeFiles/malloc.dir/sources/mem.c.s
 
 CMakeFiles/malloc.dir/sources/mem.c.o.requires:
 
@@ -105,19 +105,45 @@ CMakeFiles/malloc.dir/sources/mem.c.o.provides: CMakeFiles/malloc.dir/sources/me
 CMakeFiles/malloc.dir/sources/mem.c.o.provides.build: CMakeFiles/malloc.dir/sources/mem.c.o
 
 
+CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o: CMakeFiles/malloc.dir/flags.make
+CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o: ../sources/show_alloc_mem.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o   -c /home/jonathan/Project/malloc/sources/show_alloc_mem.c
+
+CMakeFiles/malloc.dir/sources/show_alloc_mem.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/malloc.dir/sources/show_alloc_mem.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/jonathan/Project/malloc/sources/show_alloc_mem.c > CMakeFiles/malloc.dir/sources/show_alloc_mem.c.i
+
+CMakeFiles/malloc.dir/sources/show_alloc_mem.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/malloc.dir/sources/show_alloc_mem.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/jonathan/Project/malloc/sources/show_alloc_mem.c -o CMakeFiles/malloc.dir/sources/show_alloc_mem.c.s
+
+CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.requires:
+
+.PHONY : CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.requires
+
+CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.provides: CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.requires
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.provides.build
+.PHONY : CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.provides
+
+CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.provides.build: CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o
+
+
 # Object files for target malloc
 malloc_OBJECTS = \
 "CMakeFiles/malloc.dir/sources/malloc.c.o" \
-"CMakeFiles/malloc.dir/sources/mem.c.o"
+"CMakeFiles/malloc.dir/sources/mem.c.o" \
+"CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o"
 
 # External object files for target malloc
 malloc_EXTERNAL_OBJECTS =
 
 malloc: CMakeFiles/malloc.dir/sources/malloc.c.o
 malloc: CMakeFiles/malloc.dir/sources/mem.c.o
+malloc: CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o
 malloc: CMakeFiles/malloc.dir/build.make
 malloc: CMakeFiles/malloc.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jcarra/Ninjaban/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable malloc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable malloc"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/malloc.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -127,6 +153,7 @@ CMakeFiles/malloc.dir/build: malloc
 
 CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/malloc.c.o.requires
 CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/mem.c.o.requires
+CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.requires
 
 .PHONY : CMakeFiles/malloc.dir/requires
 
@@ -135,6 +162,6 @@ CMakeFiles/malloc.dir/clean:
 .PHONY : CMakeFiles/malloc.dir/clean
 
 CMakeFiles/malloc.dir/depend:
-	cd /Users/jcarra/Ninjaban/malloc/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/jcarra/Ninjaban/malloc /Users/jcarra/Ninjaban/malloc /Users/jcarra/Ninjaban/malloc/cmake-build-debug /Users/jcarra/Ninjaban/malloc/cmake-build-debug /Users/jcarra/Ninjaban/malloc/cmake-build-debug/CMakeFiles/malloc.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jonathan/Project/malloc/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jonathan/Project/malloc /home/jonathan/Project/malloc /home/jonathan/Project/malloc/cmake-build-debug /home/jonathan/Project/malloc/cmake-build-debug /home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/malloc.dir/depend
 

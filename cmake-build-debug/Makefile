@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Users/jcarra/CLion.app/Contents/bin/cmake/bin/cmake
+CMAKE_COMMAND = /home/jonathan/Clion/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /Users/jcarra/CLion.app/Contents/bin/cmake/bin/cmake -E remove -f
+RM = /home/jonathan/Clion/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/jcarra/Ninjaban/malloc
+CMAKE_SOURCE_DIR = /home/jonathan/Project/malloc
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/jcarra/Ninjaban/malloc/cmake-build-debug
+CMAKE_BINARY_DIR = /home/jonathan/Project/malloc/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/jcarra/Ninjaban/malloc/cmake-build-debug
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/Users/jcarra/CLion.app/Contents/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/jonathan/Clion/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -70,7 +70,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/Users/jcarra/CLion.app/Contents/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/jonathan/Clion/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jcarra/Ninjaban/malloc/cmake-build-debug/CMakeFiles /Users/jcarra/Ninjaban/malloc/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles /home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jcarra/Ninjaban/malloc/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -177,6 +177,33 @@ sources/mem.c.s:
 	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/mem.c.s
 .PHONY : sources/mem.c.s
 
+sources/show_alloc_mem.o: sources/show_alloc_mem.c.o
+
+.PHONY : sources/show_alloc_mem.o
+
+# target to build an object file
+sources/show_alloc_mem.c.o:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o
+.PHONY : sources/show_alloc_mem.c.o
+
+sources/show_alloc_mem.i: sources/show_alloc_mem.c.i
+
+.PHONY : sources/show_alloc_mem.i
+
+# target to preprocess a source file
+sources/show_alloc_mem.c.i:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/show_alloc_mem.c.i
+.PHONY : sources/show_alloc_mem.c.i
+
+sources/show_alloc_mem.s: sources/show_alloc_mem.c.s
+
+.PHONY : sources/show_alloc_mem.s
+
+# target to generate assembly for a file
+sources/show_alloc_mem.c.s:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/show_alloc_mem.c.s
+.PHONY : sources/show_alloc_mem.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -192,6 +219,9 @@ help:
 	@echo "... sources/mem.o"
 	@echo "... sources/mem.i"
 	@echo "... sources/mem.s"
+	@echo "... sources/show_alloc_mem.o"
+	@echo "... sources/show_alloc_mem.i"
+	@echo "... sources/show_alloc_mem.s"
 .PHONY : help
 
 

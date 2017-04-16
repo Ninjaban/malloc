@@ -1,1 +1,1 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/malloc.dir/sources/malloc.c.o CMakeFiles/malloc.dir/sources/mem.c.o  -o malloc 
+/usr/bin/cc  -g   CMakeFiles/malloc.dir/sources/malloc.c.o CMakeFiles/malloc.dir/sources/mem.c.o CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o  -o malloc 

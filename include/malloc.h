@@ -100,7 +100,7 @@ extern t_mem		*g_mem;
 **  SMALL_MAX		taille maximum d'un SMALL pour une allocation de SMALL_ZONE
 */
 
-# define HEADER		2424
+# define HEADER		(size_t)2424
 # define TINY_ZONE	16
 # define SMALL_ZONE	(TINY_ZONE * 100)
 /*# define SMALL_ZONE	TINY_ZONE * 100*/
@@ -115,9 +115,9 @@ t_zone				*ft_mem_get_zone(void *addr);
 size_t				ft_mem_get_size(void *addr);
 t_mem				*ft_mem_init(void);
 void				free(void *ptr);
-void				*ft_malloc(size_t size);
+void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
-void				show_alloc_mem();
+void				show_alloc_mem(void);
 
 
 #endif

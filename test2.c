@@ -13,17 +13,19 @@
 #include <stdlib.h>
 #include "malloc.h"
 
+#include <stdio.h>
+
 int      main()
 {
-   int   i;
-   char  *addr;
+   size_t   nbr = 2;
+   int      i = 1;
 
-   i = 0;
-   while (i < 1024)
+   while (i < 24)
    {
-      addr = malloc(2);
-      addr[0] = 42;
-      i++;
+      malloc(nbr);
+      nbr = nbr + nbr;
+      i = i + 1;
    }
+   show_alloc_mem();
    return (0);
 }
