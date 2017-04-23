@@ -57,6 +57,8 @@ static void		*ft_getnextzone(t_head *addr, size_t len)
 	return ((addr->next) ? ft_getnextzone(addr->next, len) : NULL);
 }
 
+#include <stdio.h>
+
 static t_zone	*ft_newzone(void *headaddr, void *addr, size_t size)
 {
 	t_zone		*zone;
@@ -73,8 +75,6 @@ static void		*ft_newhead(void *addr, size_t size, size_t zonelen)
 	t_head		*head;
 	t_head		*tmp;
 
-	static size_t nb = 0;
-	nb = nb + 1;
 	head = addr;
 	head->size = size;
 	head->next = NULL;
@@ -127,7 +127,6 @@ void			*malloc(size_t len)
 
 	if (!g_mem)
 		g_mem = ft_mem_init();
-
 	if (g_mem->addr && (addr = ft_getnextzone(g_mem->addr, len)))
 			ft_addzone(g_mem->addr, addr, len);
 	else

@@ -24,13 +24,11 @@ void			ft_print_zones(t_zone *zones, size_t *total)
 	t_zone		*zone;
 
 	zone = zones;
-	while (zone)
-	{
-		printf("%p - %p : %zu octets\n", zone->addr, zone->addr + zone->size,
-				zone->size);
-		*total = *total + zone->size;
-		zone = zone->next;
-	}
+	if (zone->next)
+		ft_print_zones(zone->next, &(*total));
+	printf("%p - %p : %zu octets\n", zone->addr, zone->addr + zone->size,
+			zone->size);
+	*total = *total + zone->size;
 }
 
 void			ft_print_head(t_head *head, size_t *total)
@@ -44,7 +42,8 @@ void			ft_print_head(t_head *head, size_t *total)
 	else
 		str = "LARGE";
 	printf("%s : %p\n", str, head);
-	ft_print_zones(head->zones, &(*total));
+	if (head->zones)
+		ft_print_zones(head->zones, &(*total));
 }
 
 void			show_alloc_mem(void)
@@ -52,6 +51,8 @@ void			show_alloc_mem(void)
 	t_head		*head;
 	size_t		total;
 
+	if (!g_mem)
+		return ;
 	head = g_mem->addr;
 	total = 0;
 	while (head)
