@@ -19,7 +19,8 @@ endif
 
 SRC		=   mem.c \
             malloc.c \
-            show_alloc_mem.c
+            show_alloc_mem.c \
+            free.c
 
 DIRSRC		=	sources/
 DIRINC		=	include/

@@ -17,29 +17,40 @@ t_mem		*g_mem = NULL;
 static size_t	ft_getsize(size_t len)
 {
 	if (len <= TINY_ZONE)
-		return ((size_t)g_mem->sz);
+		return ((size_t)g_mem->sz *
+				((TINY_ZONE * 100 + HEADER * 101) / g_mem->sz + 1));
 	else if (len <= SMALL_ZONE)
 		return ((size_t)g_mem->sz *
-				((SMALL_ZONE * 100 + HEADER) / g_mem->sz + 1));
+				((SMALL_ZONE * 100 + HEADER * 101) / g_mem->sz + 1));
 	else
-		return ((size_t)g_mem->sz * (((len + HEADER) / (size_t)g_mem->sz) + 1));
+		return ((size_t)g_mem->sz * (((len + HEADER * 2) / (size_t)g_mem->sz) + 1));
+}
+
+static size_t	ft_getsizeless(t_head *addr)
+{
+	t_zone	*zone;
+
+	zone = addr->zones;
+	while (zone->next)
+		zone = zone->next;
+	return ((size_t)(zone->addr - (void *)(zone + 1)));
 }
 
 static void		*ft_getnextzone(t_head *addr, size_t len)
 {
-	t_zone *zone;
+	t_zone	*zone;
 
 	zone = addr->zones;
-	if (addr->size - HEADER >= len)
+	if (addr->size > len && ft_getsizeless(addr) >= sizeof(t_zone))
 		while (zone)
 		{
-			if (zone->next && len <= (size_t)(zone->next->addr -
-											(zone->addr + zone->size)))
-				return (zone->addr + zone->size);
-			else if (!zone->next && len <=
-			(size_t)(((void *)addr + addr->size) - (zone->addr + zone->size)))
+			if (zone->next && len <=
+				(size_t)(zone->addr - (zone->next->addr + zone->next->size)))
+				return (zone->next->addr + zone->next->size);
+			else if (!zone->next && len + sizeof(t_zone) <=
+			(size_t)((zone->addr + zone->size) - (void *)(zone + 1)))
 			{
-				return (zone->addr + zone->size);
+				return (zone->addr - len);
 			}
 			zone = zone->next;
 		}
@@ -67,7 +78,7 @@ static void		*ft_newhead(void *addr, size_t size, size_t zonelen)
 	head = addr;
 	head->size = size;
 	head->next = NULL;
-	head->zones = ft_newzone(addr + sizeof(t_head), addr + HEADER, zonelen);
+	head->zones = ft_newzone(addr + sizeof(t_head), addr + size - zonelen, zonelen);
 	if (g_mem->addr)
 	{
 		tmp = g_mem->addr;
@@ -100,7 +111,7 @@ static void		ft_addzone(t_head *addr, void *ptr, size_t len)
 		ztmp = tmp->zones;
 		while (ztmp)
 		{
-			if (ztmp->addr + ztmp->size == ptr)
+			if (ztmp->addr - ((ztmp->next) ? ztmp->next->size : len) == ptr)
 				return ft_structzone(ztmp, ptr, len);
 			ztmp = ztmp->next;
 		}

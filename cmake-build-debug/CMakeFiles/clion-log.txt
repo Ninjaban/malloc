@@ -1,4 +1,4 @@
-/home/jonathan/Clion/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/jonathan/Project/malloc
+/home/nathan/My_bin/Sources/CLion/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/nathan/Project/malloc
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/jonathan/Project/malloc/cmake-build-debug
+-- Build files have been written to: /home/nathan/Project/malloc/cmake-build-debug

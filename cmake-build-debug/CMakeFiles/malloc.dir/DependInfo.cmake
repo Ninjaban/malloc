@@ -4,9 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/jonathan/Project/malloc/sources/malloc.c" "/home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/malloc.c.o"
-  "/home/jonathan/Project/malloc/sources/mem.c" "/home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/mem.c.o"
-  "/home/jonathan/Project/malloc/sources/show_alloc_mem.c" "/home/jonathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o"
+  "/home/nathan/Project/malloc/sources/malloc.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/malloc.c.o"
+  "/home/nathan/Project/malloc/sources/mem.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/mem.c.o"
+  "/home/nathan/Project/malloc/sources/realloc.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/realloc.c.o"
+  "/home/nathan/Project/malloc/sources/show_alloc_mem.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

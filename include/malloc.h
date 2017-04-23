@@ -100,8 +100,8 @@ extern t_mem		*g_mem;
 **  SMALL_MAX		taille maximum d'un SMALL pour une allocation de SMALL_ZONE
 */
 
-# define HEADER		(size_t)2424
-# define TINY_ZONE	16
+# define HEADER		(size_t)24
+# define TINY_ZONE	64
 # define SMALL_ZONE	(TINY_ZONE * 100)
 /*# define SMALL_ZONE	TINY_ZONE * 100*/
 # define TINY_MAX	(TINY_ZONE * 100)
