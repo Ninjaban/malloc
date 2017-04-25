@@ -25,7 +25,7 @@ static void	*realloc_copy(void *ptr, size_t size, size_t n)
 // si !zone => NULL
 // si ya de la place, agrandit / rétrécit le chiffre dans le header
 //sinon, déplace, puis free
-static void	*realloc_exec(ptr, size)
+static void	*realloc_exec(void *ptr, size_t size)
 {
 	t_zone	*cursor;
 	void	*addr;
