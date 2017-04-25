@@ -73,6 +73,8 @@ void			free(void *ptr)
 			ft_clear_zone(head, zone);
 			if (!head->zones)
 				ft_delete_head(head);
+			if (!g_mem->addr)
+				munmap(g_mem, (size_t)g_mem->sz);
 			return ;
 		}
 		head = head->next;
