@@ -20,13 +20,16 @@ int	main(void)
 
 	i = 1;
 	addr = NULL;
-	while (i < 999999999)
+	while (i < 1000001)
 	{
-		if ((addr = realloc(addr, i)))
-			printf("%p\t%zu\n", addr, i);
-		i *= 5;
+		if ((addr = realloc(addr, 1024)))
+//			printf("%p\t%zu\n", addr, i);
+			;
+//		addr = malloc(i);
+//		free(addr);
+		realloc(addr, 0);
+		addr = NULL;
+		i++;
 	}
-	if (addr)
-		free(addr);
-	printf("DONE\n");
+//	printf("DONE\n");
 }

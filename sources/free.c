@@ -113,7 +113,10 @@ void			free(void *ptr)
 			if (!head->zones)
 				ft_delete_head(head);
 			if (!g_mem->addr)
-				munmap(g_mem, (size_t)g_mem->sz);
+			{
+				munmap(g_mem, (size_t) g_mem->sz);
+				g_mem = NULL;
+			}
 			return ;
 		}
 		head = head->next;

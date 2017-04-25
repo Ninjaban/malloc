@@ -11,17 +11,17 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "malloc.h"
+#include "include/malloc.h"
 
 int	main(void)
 {
 	int		i;
 	char	*addr;
 
-	i = 0;
-	while (i < 1024)
+	i = 1;
+	while (i < 1024 * 100)
 	{
-		addr = malloc(1024);
+		addr = malloc(i);
 		addr[0] = 42;
 		free(addr);
 		i++;

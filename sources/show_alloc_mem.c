@@ -58,7 +58,10 @@ void			show_alloc_mem(void)
 	size_t		total;
 
 	if (!g_mem)
+	{
+		ft_print_total(0);
 		return ;
+	}
 	head = g_mem->addr;
 	total = 0;
 	while (head)
