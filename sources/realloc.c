@@ -15,38 +15,35 @@
 //mnalloc une nouvelle zone puis copie le contenu de ptr dedans
 static void	*realloc_copy(void *ptr, size_t size)
 {
-	void	*new_zone;
-	int		i;
+	void *naddr;
 
-	i = 0;
-	new_zone = malloc(size);
-	while (i < size)
-	{
-		*(new_zone + i) = *(ptr + i);
-		i++;
-	}
-	return (new_zone);
+	naddr = malloc(size);
+	ft_memcpy(naddr, ptr);
+	return (naddr);
 }
 
 // si !zone => NULL
-// si ya de la place, agrandit le chiffre dans le header
+// si ya de la place, agrandit / rétrécit le chiffre dans le header
 //sinon, déplace, puis free
 static void	*realloc_exec(ptr, size)
 {
-	t_zone	*zone;
-	void	*new_zone;
+	t_zone	*cursor;
+	void	*addr;
 
-	zone = ft_mem_get_zone(addr);
-	if (!zone)
-		return (NULL);
-	if (size <= (((t_zone *)(zone->next))->addr - (zone->addr + zone->size)))
+	cursor = ft_fetch_zone(ptr);
+	if (ft_zone_fit(size, cursor))
 	{
-		zone->size = size;
-		return (zone->addr);
+		cursor->size = size;
+		addr = cursor->addr;
 	}
-	new_zone = realloc_copy(ptr, size);
-	free(ptr);
-	return (new_zone);
+	else
+	{
+		addr = realloc_copy(ptr, size);
+		free(cursor->addr);
+		cursor->addr = addr;
+	}
+
+	return (addr);
 }
 
 // si size = 0 => free(ptr)
