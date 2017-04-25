@@ -12,6 +12,16 @@
 
 #include <malloc.h>
 
+/*
+**	Cherche dans une plage un header de zone dont la zone corresponds à @ptr.
+**
+**	Renvois la zone trouvé, ou NULL si aucun header ne corresponds.
+**
+**	@param zones
+**	@param ptr
+**	@return zone
+*/
+
 t_zone			*ft_search_zone(t_zone *zones, void *ptr)
 {
 	t_zone		*zone;
@@ -25,6 +35,16 @@ t_zone			*ft_search_zone(t_zone *zones, void *ptr)
 	}
 	return (NULL);
 }
+
+/*
+**	supprime le header de zone @zone dans la plage @head.
+**
+**	Afin d'évité les trous entre les headers de zone, remonte d'un cran les
+**	informations des header suivant.
+**
+**	@param head
+**	@param zone
+*/
 
 void			ft_clear_zone(t_head *head, t_zone *zone)
 {
@@ -42,6 +62,12 @@ void			ft_clear_zone(t_head *head, t_zone *zone)
 			}
 }
 
+/*
+**	Delete la plage @head.
+**
+**	@param head
+*/
+
 void			ft_delete_head(t_head *head)
 {
 	t_head		*tmp;
@@ -57,6 +83,19 @@ void			ft_delete_head(t_head *head)
 	}
 	munmap(head, head->size);
 }
+
+/*
+**	Vérifie si ptr et g_mem existe.
+**
+**	Si oui, cherche ptr dans les plages grace à search_zone();
+**
+**	Une fois trouvé, supprime la zone avec clear_zone();
+**
+**	Si la plage ne contiens plus aucune zone, supprime la plage avec
+**	delete_head();
+**	
+**	@param ptr
+*/
 
 void			free(void *ptr)
 {
