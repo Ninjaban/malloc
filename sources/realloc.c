@@ -6,13 +6,14 @@
 /*   By: elemarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 14:20:32 by elemarch          #+#    #+#             */
-/*   Updated: 2017/04/12 16:27:47 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/25 15:57:51 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 //mnalloc une nouvelle zone puis copie le contenu de ptr dedans
+
 static void	*realloc_copy(void *ptr, size_t size, size_t n)
 {
 	void *naddr;
@@ -25,7 +26,8 @@ static void	*realloc_copy(void *ptr, size_t size, size_t n)
 // si !zone => NULL
 // si ya de la place, agrandit / rétrécit le chiffre dans le header
 //sinon, déplace, puis free
-static void	*realloc_exec(ptr, size)
+
+static void	*realloc_exec(void *ptr, size_t size)
 {
 	t_zone	*cursor;
 	void	*addr;
@@ -42,13 +44,13 @@ static void	*realloc_exec(ptr, size)
 		free(cursor->addr);
 		cursor->addr = addr;
 	}
-
 	return (addr);
 }
 
 // si size = 0 => free(ptr)
 // si !ptr => malloc(size)
 // sinon => realloc exec
+
 void		*realloc(void *ptr, size_t size)
 {
 	void	*new_zone;

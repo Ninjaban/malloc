@@ -24,3 +24,8 @@ zone2
 ...
 PLAGE1_END = page_start + sz (- HEADER ?)
 	-> addr PAGE2_HEAD
+----
+
+gcc -o test test.c
+make re
+./run.sh /usr/bin/time -l ./test

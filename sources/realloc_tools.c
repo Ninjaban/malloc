@@ -6,7 +6,7 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 11:34:15 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/25 13:26:54 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/25 15:37:16 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 ** Cherche la zone correspondant à l'adresse
 ** Retourne NULL si aucune zone ne correspond
 */
-t_zone		*ft_fetch_zone(void *addr)
+
+t_zone			*ft_fetch_zone(void *addr)
 {
-	t_head	*head;
-	t_zone	*zone;
+	t_head		*head;
+	t_zone		*zone;
 
 	if (!addr || !g_mem)
 		return (NULL);
@@ -37,6 +38,7 @@ t_zone		*ft_fetch_zone(void *addr)
 ** Cherche le header correspondant à la zone
 ** Retourne NULL si aucun header ne correspond
 */
+
 static t_head	*ft_fetch_head(t_zone *zone)
 {
 	t_head		*head;
@@ -57,6 +59,7 @@ static t_head	*ft_fetch_head(t_zone *zone)
 /*
 ** Retourne TRUE si il reste assez de place dans la zone réservée, FALSE sinon
 */
+
 char			ft_zone_fit(size_t size, t_zone *zone)
 {
 	t_head		*head;
@@ -68,4 +71,23 @@ char			ft_zone_fit(size_t size, t_zone *zone)
 	head = ft_fetch_head(zone);
 	return (size <= (head->size - (size_t)(zone->addr - head->zones->addr)) ?
 			TRUE : FALSE);
+}
+
+/*
+** Copie une zone memoire de taille n
+*/
+
+void			*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	unsigned char		*d;
+	const unsigned char	*s;
+
+	d = dst;
+	s = src;
+	while (n)
+	{
+		*(d + n - 1) = *(s + n - 1);
+		n--;
+	}
+	return (dst);
 }
