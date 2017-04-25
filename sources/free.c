@@ -8,9 +8,9 @@
 /*   Created: 2017/04/17 09:29:00 by jcarra            #+#    #+#             */
 /*   Updated: 2017/04/17 09:29:00 by jcarra           ###   ########.fr       */
 /*                                                                            */
-#include <malloc.h>
-
 /* ************************************************************************** */
+
+#include <malloc.h>
 
 t_zone			*ft_search_zone(t_zone *zones, void *ptr)
 {
