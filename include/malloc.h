@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:48:00 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/12 09:48:00 by jcarra           ###   ########.fr       */
+/*   Updated: 2017/04/25 11:29:54 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void				free(void *ptr);
 void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
 void				show_alloc_mem(void);
+
+t_zone				*ft_search_zone(t_zone *zones, void *ptr);
 
 
 #endif
