@@ -6,17 +6,17 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 15:21:16 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/14 15:21:57 by jcarra           ###   ########.fr       */
+/*   Updated: 2017/04/25 15:39:19 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "malloc.h"
 
-int      main()
+int	main(void)
 {
-	int   i;
-	char  *addr;
+	int		i;
+	char	*addr;
 
 	i = 0;
 	while (i < 1024)
@@ -30,10 +30,10 @@ int      main()
 }
 
 /*
-int      main()
+int	main(void)
 {
-   int   i;
-   char  *addr;
+   int	i;
+   char	*addr;
 
    i = 0;
    while (i < 1024)

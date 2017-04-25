@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:31:00 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/12 11:31:00 by jcarra           ###   ########.fr       */
+/*   Updated: 2017/04/25 15:43:09 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ size_t		ft_mem_get_size(void *addr)
 }
 
 //initialise la variable globale
+
 t_mem		*ft_mem_init(void)
 {
 	t_mem	*mem;
 
 	mem = mmap(0, (size_t)getpagesize(), PROT_READ | PROT_WRITE,
-			   MAP_PRIVATE | MAP_ANON, -1, 0);
+				MAP_PRIVATE | MAP_ANON, -1, 0);
 	mem->addr = NULL;
 	mem->sz = getpagesize();
 	return (mem);

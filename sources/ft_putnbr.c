@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:13:00 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/12 09:13:00 by jcarra           ###   ########.fr       */
+/*   Updated: 2017/04/25 15:41:46 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void		ft_putnbr_hexa_single(size_t c)
 		ft_putchar(97 + c - 10);
 }
 
-int            ft_putnbr_hexa(size_t nbr)
+int				ft_putnbr_hexa(size_t nbr)
 {
-	size_t max;
-	size_t value;
+	size_t	max;
+	size_t	value;
 	int		n;
 
 	n = 0;
@@ -53,7 +53,7 @@ void			ft_print_address(size_t addr)
 		ft_putchar('0');
 }
 
-void            ft_putnbr_sizet(size_t nbr)
+void			ft_putnbr_sizet(size_t nbr)
 {
 	if (nbr >= 10)
 	{
