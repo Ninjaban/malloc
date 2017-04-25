@@ -111,6 +111,11 @@ extern t_mem		*g_mem;
 ** PROTOTYPES
 */
 
+void				ft_putchar(char c);
+void				ft_putstr(char *str);
+void				ft_putnbr_sizet(size_t nbr);
+void				ft_print_address(size_t addr);
+
 t_zone				*ft_mem_get_zone(void *addr);
 size_t				ft_mem_get_size(void *addr);
 t_mem				*ft_mem_init(void);

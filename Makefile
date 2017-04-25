@@ -17,7 +17,9 @@ ifeq ($(HOSTTYPE),)
     HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
-SRC		=   mem.c \
+SRC		=   ft_putstr.c \
+            ft_putnbr.c \
+            mem.c \
             malloc.c \
             show_alloc_mem.c \
             free.c
@@ -43,6 +45,10 @@ all		:	$(NAME)
 $(NAME)		:	.hide
 			@$(CC) $(CFLAGS) -shared -o $(NAME) $(OBJS)
 			@$(LN) $(NAME) $(NAMELN)
+
+%.o		:	%.c
+			@$(CC) -o $@ -c $< $(CFLAGS)
+			@$(ECHO) '-> \033[36m$@\033[0m\n'
 
 .hide		:	$(OBJS)
 			@touch .hide

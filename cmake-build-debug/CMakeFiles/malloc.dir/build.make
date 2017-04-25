@@ -129,9 +129,33 @@ CMakeFiles/malloc.dir/sources/realloc.c.o.provides: CMakeFiles/malloc.dir/source
 CMakeFiles/malloc.dir/sources/realloc.c.o.provides.build: CMakeFiles/malloc.dir/sources/realloc.c.o
 
 
+CMakeFiles/malloc.dir/sources/free.c.o: CMakeFiles/malloc.dir/flags.make
+CMakeFiles/malloc.dir/sources/free.c.o: ../sources/free.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/malloc.dir/sources/free.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/malloc.dir/sources/free.c.o   -c /home/nathan/Project/malloc/sources/free.c
+
+CMakeFiles/malloc.dir/sources/free.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/malloc.dir/sources/free.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nathan/Project/malloc/sources/free.c > CMakeFiles/malloc.dir/sources/free.c.i
+
+CMakeFiles/malloc.dir/sources/free.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/malloc.dir/sources/free.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nathan/Project/malloc/sources/free.c -o CMakeFiles/malloc.dir/sources/free.c.s
+
+CMakeFiles/malloc.dir/sources/free.c.o.requires:
+
+.PHONY : CMakeFiles/malloc.dir/sources/free.c.o.requires
+
+CMakeFiles/malloc.dir/sources/free.c.o.provides: CMakeFiles/malloc.dir/sources/free.c.o.requires
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/free.c.o.provides.build
+.PHONY : CMakeFiles/malloc.dir/sources/free.c.o.provides
+
+CMakeFiles/malloc.dir/sources/free.c.o.provides.build: CMakeFiles/malloc.dir/sources/free.c.o
+
+
 CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o: CMakeFiles/malloc.dir/flags.make
 CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o: ../sources/show_alloc_mem.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o   -c /home/nathan/Project/malloc/sources/show_alloc_mem.c
 
 CMakeFiles/malloc.dir/sources/show_alloc_mem.c.i: cmake_force
@@ -153,12 +177,63 @@ CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.provides: CMakeFiles/malloc.dir
 CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.provides.build: CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o
 
 
+CMakeFiles/malloc.dir/sources/ft_putnbr.c.o: CMakeFiles/malloc.dir/flags.make
+CMakeFiles/malloc.dir/sources/ft_putnbr.c.o: ../sources/ft_putnbr.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/malloc.dir/sources/ft_putnbr.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/malloc.dir/sources/ft_putnbr.c.o   -c /home/nathan/Project/malloc/sources/ft_putnbr.c
+
+CMakeFiles/malloc.dir/sources/ft_putnbr.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/malloc.dir/sources/ft_putnbr.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nathan/Project/malloc/sources/ft_putnbr.c > CMakeFiles/malloc.dir/sources/ft_putnbr.c.i
+
+CMakeFiles/malloc.dir/sources/ft_putnbr.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/malloc.dir/sources/ft_putnbr.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nathan/Project/malloc/sources/ft_putnbr.c -o CMakeFiles/malloc.dir/sources/ft_putnbr.c.s
+
+CMakeFiles/malloc.dir/sources/ft_putnbr.c.o.requires:
+
+.PHONY : CMakeFiles/malloc.dir/sources/ft_putnbr.c.o.requires
+
+CMakeFiles/malloc.dir/sources/ft_putnbr.c.o.provides: CMakeFiles/malloc.dir/sources/ft_putnbr.c.o.requires
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/ft_putnbr.c.o.provides.build
+.PHONY : CMakeFiles/malloc.dir/sources/ft_putnbr.c.o.provides
+
+CMakeFiles/malloc.dir/sources/ft_putnbr.c.o.provides.build: CMakeFiles/malloc.dir/sources/ft_putnbr.c.o
+
+
+CMakeFiles/malloc.dir/sources/ft_putstr.c.o: CMakeFiles/malloc.dir/flags.make
+CMakeFiles/malloc.dir/sources/ft_putstr.c.o: ../sources/ft_putstr.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/malloc.dir/sources/ft_putstr.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/malloc.dir/sources/ft_putstr.c.o   -c /home/nathan/Project/malloc/sources/ft_putstr.c
+
+CMakeFiles/malloc.dir/sources/ft_putstr.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/malloc.dir/sources/ft_putstr.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nathan/Project/malloc/sources/ft_putstr.c > CMakeFiles/malloc.dir/sources/ft_putstr.c.i
+
+CMakeFiles/malloc.dir/sources/ft_putstr.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/malloc.dir/sources/ft_putstr.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nathan/Project/malloc/sources/ft_putstr.c -o CMakeFiles/malloc.dir/sources/ft_putstr.c.s
+
+CMakeFiles/malloc.dir/sources/ft_putstr.c.o.requires:
+
+.PHONY : CMakeFiles/malloc.dir/sources/ft_putstr.c.o.requires
+
+CMakeFiles/malloc.dir/sources/ft_putstr.c.o.provides: CMakeFiles/malloc.dir/sources/ft_putstr.c.o.requires
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/ft_putstr.c.o.provides.build
+.PHONY : CMakeFiles/malloc.dir/sources/ft_putstr.c.o.provides
+
+CMakeFiles/malloc.dir/sources/ft_putstr.c.o.provides.build: CMakeFiles/malloc.dir/sources/ft_putstr.c.o
+
+
 # Object files for target malloc
 malloc_OBJECTS = \
 "CMakeFiles/malloc.dir/sources/malloc.c.o" \
 "CMakeFiles/malloc.dir/sources/mem.c.o" \
 "CMakeFiles/malloc.dir/sources/realloc.c.o" \
-"CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o"
+"CMakeFiles/malloc.dir/sources/free.c.o" \
+"CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o" \
+"CMakeFiles/malloc.dir/sources/ft_putnbr.c.o" \
+"CMakeFiles/malloc.dir/sources/ft_putstr.c.o"
 
 # External object files for target malloc
 malloc_EXTERNAL_OBJECTS =
@@ -166,10 +241,13 @@ malloc_EXTERNAL_OBJECTS =
 malloc: CMakeFiles/malloc.dir/sources/malloc.c.o
 malloc: CMakeFiles/malloc.dir/sources/mem.c.o
 malloc: CMakeFiles/malloc.dir/sources/realloc.c.o
+malloc: CMakeFiles/malloc.dir/sources/free.c.o
 malloc: CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o
+malloc: CMakeFiles/malloc.dir/sources/ft_putnbr.c.o
+malloc: CMakeFiles/malloc.dir/sources/ft_putstr.c.o
 malloc: CMakeFiles/malloc.dir/build.make
 malloc: CMakeFiles/malloc.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable malloc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable malloc"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/malloc.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -180,7 +258,10 @@ CMakeFiles/malloc.dir/build: malloc
 CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/malloc.c.o.requires
 CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/mem.c.o.requires
 CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/realloc.c.o.requires
+CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/free.c.o.requires
 CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/show_alloc_mem.c.o.requires
+CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/ft_putnbr.c.o.requires
+CMakeFiles/malloc.dir/requires: CMakeFiles/malloc.dir/sources/ft_putstr.c.o.requires
 
 .PHONY : CMakeFiles/malloc.dir/requires
 

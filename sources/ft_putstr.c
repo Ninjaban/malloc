@@ -1,48 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test0.c                                            :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 15:21:16 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/14 15:21:57 by jcarra           ###   ########.fr       */
+/*   Created: 2017/04/12 09:13:00 by jcarra            #+#    #+#             */
+/*   Updated: 2017/04/12 09:13:00 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "malloc.h"
+#include <unistd.h>
 
-int      main()
+void		ft_putchar(char c)
 {
-	int   i;
-	char  *addr;
-
-	i = 0;
-	while (i < 1024)
-	{
-		addr = malloc(1);
-		addr[0] = 42;
-		i++;
-	}
-	show_alloc_mem();
-	return (0);
+	write(1, &c, 1);
 }
 
-/*
-int      main()
+size_t		ft_strlen(char *str)
 {
-   int   i;
-   char  *addr;
+	size_t	nbr;
 
-   i = 0;
-   while (i < 1024)
-   {
-      addr = malloc(1);
-      addr[0] = 42;
-      i++;
-   }
-	show_alloc_mem();
-   return (0);
+	nbr = 0;
+	while (str[nbr])
+		nbr = nbr + 1;
+	return (nbr);
 }
-*/
+
+void		ft_putstr(char *str)
+{
+	write(1, str, ft_strlen(str));
+}

@@ -89,6 +89,15 @@
 		<Unit filename="/home/nathan/Project/malloc/include/malloc.h">
 			<Option target="malloc"/>
 		</Unit>
+		<Unit filename="/home/nathan/Project/malloc/sources/free.c">
+			<Option target="malloc"/>
+		</Unit>
+		<Unit filename="/home/nathan/Project/malloc/sources/ft_putnbr.c">
+			<Option target="malloc"/>
+		</Unit>
+		<Unit filename="/home/nathan/Project/malloc/sources/ft_putstr.c">
+			<Option target="malloc"/>
+		</Unit>
 		<Unit filename="/home/nathan/Project/malloc/sources/malloc.c">
 			<Option target="malloc"/>
 		</Unit>

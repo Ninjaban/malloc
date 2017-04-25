@@ -16,7 +16,10 @@
 
 void			ft_print_total(size_t total)
 {
-	printf("Total : %zu octets\n", total);
+//	printf("Total : %zu octets\n", total);
+	ft_putstr("Total : ");
+	ft_putnbr_sizet(total);
+	ft_putstr(" octets\n");
 }
 
 void			ft_print_zones(t_zone *zones, size_t *total)
@@ -26,8 +29,14 @@ void			ft_print_zones(t_zone *zones, size_t *total)
 	zone = zones;
 	if (zone->next)
 		ft_print_zones(zone->next, &(*total));
-	printf("%p - %p : %zu octets\n", zone->addr, zone->addr + zone->size,
-			zone->size);
+	ft_print_address((size_t)zone->addr);
+	ft_putstr(" - ");
+	ft_print_address((size_t)(zone->addr + zone->size));
+	ft_putstr(" : ");
+	ft_putnbr_sizet(zone->size);
+	ft_putstr(" octets\n");
+//	printf("%p - %p : %zu octets\n", zone->addr, zone->addr + zone->size,
+//			zone->size);
 	*total = *total + zone->size;
 }
 
@@ -36,12 +45,15 @@ void			ft_print_head(t_head *head, size_t *total)
 	char		*str;
 
 	if (head->size / g_mem->sz <= TINY_ZONE)
-		str = "TINY";
+		str = "TINY : ";
 	else if (head->size / g_mem->sz <= SMALL_ZONE)
-		str = "SMALL";
+		str = "SMALL : ";
 	else
-		str = "LARGE";
-	printf("%s : %p\n", str, head);
+		str = "LARGE : ";
+//	printf("%s : %p\n", str, head);
+	ft_putstr(str);
+	ft_print_address((size_t)head);
+	ft_putchar('\n');
 	if (head->zones)
 		ft_print_zones(head->zones, &(*total));
 }

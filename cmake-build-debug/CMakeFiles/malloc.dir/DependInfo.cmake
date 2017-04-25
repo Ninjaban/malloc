@@ -4,6 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/nathan/Project/malloc/sources/free.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/free.c.o"
+  "/home/nathan/Project/malloc/sources/ft_putnbr.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/ft_putnbr.c.o"
+  "/home/nathan/Project/malloc/sources/ft_putstr.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/ft_putstr.c.o"
   "/home/nathan/Project/malloc/sources/malloc.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/malloc.c.o"
   "/home/nathan/Project/malloc/sources/mem.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/mem.c.o"
   "/home/nathan/Project/malloc/sources/realloc.c" "/home/nathan/Project/malloc/cmake-build-debug/CMakeFiles/malloc.dir/sources/realloc.c.o"

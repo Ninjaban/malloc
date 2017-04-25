@@ -10,6 +10,7 @@ set(SOURCE_FILES
         sources/malloc.c
         sources/mem.c
         sources/realloc.c
-        sources/show_alloc_mem.c)
+        sources/free.c
+        sources/show_alloc_mem.c sources/ft_putnbr.c sources/ft_putstr.c)
 
 add_executable(malloc ${SOURCE_FILES})

@@ -123,6 +123,87 @@ malloc/fast:
 	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/build
 .PHONY : malloc/fast
 
+sources/free.o: sources/free.c.o
+
+.PHONY : sources/free.o
+
+# target to build an object file
+sources/free.c.o:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/free.c.o
+.PHONY : sources/free.c.o
+
+sources/free.i: sources/free.c.i
+
+.PHONY : sources/free.i
+
+# target to preprocess a source file
+sources/free.c.i:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/free.c.i
+.PHONY : sources/free.c.i
+
+sources/free.s: sources/free.c.s
+
+.PHONY : sources/free.s
+
+# target to generate assembly for a file
+sources/free.c.s:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/free.c.s
+.PHONY : sources/free.c.s
+
+sources/ft_putnbr.o: sources/ft_putnbr.c.o
+
+.PHONY : sources/ft_putnbr.o
+
+# target to build an object file
+sources/ft_putnbr.c.o:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/ft_putnbr.c.o
+.PHONY : sources/ft_putnbr.c.o
+
+sources/ft_putnbr.i: sources/ft_putnbr.c.i
+
+.PHONY : sources/ft_putnbr.i
+
+# target to preprocess a source file
+sources/ft_putnbr.c.i:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/ft_putnbr.c.i
+.PHONY : sources/ft_putnbr.c.i
+
+sources/ft_putnbr.s: sources/ft_putnbr.c.s
+
+.PHONY : sources/ft_putnbr.s
+
+# target to generate assembly for a file
+sources/ft_putnbr.c.s:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/ft_putnbr.c.s
+.PHONY : sources/ft_putnbr.c.s
+
+sources/ft_putstr.o: sources/ft_putstr.c.o
+
+.PHONY : sources/ft_putstr.o
+
+# target to build an object file
+sources/ft_putstr.c.o:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/ft_putstr.c.o
+.PHONY : sources/ft_putstr.c.o
+
+sources/ft_putstr.i: sources/ft_putstr.c.i
+
+.PHONY : sources/ft_putstr.i
+
+# target to preprocess a source file
+sources/ft_putstr.c.i:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/ft_putstr.c.i
+.PHONY : sources/ft_putstr.c.i
+
+sources/ft_putstr.s: sources/ft_putstr.c.s
+
+.PHONY : sources/ft_putstr.s
+
+# target to generate assembly for a file
+sources/ft_putstr.c.s:
+	$(MAKE) -f CMakeFiles/malloc.dir/build.make CMakeFiles/malloc.dir/sources/ft_putstr.c.s
+.PHONY : sources/ft_putstr.c.s
+
 sources/malloc.o: sources/malloc.c.o
 
 .PHONY : sources/malloc.o
@@ -240,6 +321,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... malloc"
+	@echo "... sources/free.o"
+	@echo "... sources/free.i"
+	@echo "... sources/free.s"
+	@echo "... sources/ft_putnbr.o"
+	@echo "... sources/ft_putnbr.i"
+	@echo "... sources/ft_putnbr.s"
+	@echo "... sources/ft_putstr.o"
+	@echo "... sources/ft_putstr.i"
+	@echo "... sources/ft_putstr.s"
 	@echo "... sources/malloc.o"
 	@echo "... sources/malloc.i"
 	@echo "... sources/malloc.s"
