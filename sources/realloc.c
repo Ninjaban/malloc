@@ -13,12 +13,12 @@
 #include "malloc.h"
 
 //mnalloc une nouvelle zone puis copie le contenu de ptr dedans
-static void	*realloc_copy(void *ptr, size_t size)
+static void	*realloc_copy(void *ptr, size_t size, size_t n)
 {
 	void *naddr;
 
 	naddr = malloc(size);
-	ft_memcpy(naddr, ptr);
+	ft_memcpy(naddr, ptr, n);
 	return (naddr);
 }
 
@@ -38,7 +38,7 @@ static void	*realloc_exec(ptr, size)
 	}
 	else
 	{
-		addr = realloc_copy(ptr, size);
+		addr = realloc_copy(ptr, size, cursor->size);
 		free(cursor->addr);
 		cursor->addr = addr;
 	}
