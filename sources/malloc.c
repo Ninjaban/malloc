@@ -33,12 +33,12 @@ static size_t	ft_getsize(size_t len)
 {
 	if (len <= TINY_ZONE)
 		return ((size_t)g_mem->sz *
-				((TINY_ZONE **	100 + HEADER **	101) / g_mem->sz + 1));
+				((TINY_ZONE * 100 + HEADER * 101) / g_mem->sz + 1));
 	else if (len <= SMALL_ZONE)
 		return ((size_t)g_mem->sz *
-				((SMALL_ZONE **	100 + HEADER **	101) / g_mem->sz + 1));
+				((SMALL_ZONE * 100 + HEADER * 101) / g_mem->sz + 1));
 	else
-		return ((size_t)g_mem->sz **	(((len + HEADER **	2) / (size_t)g_mem->sz) + 1));
+		return ((size_t)g_mem->sz * (((len + HEADER * 2) / (size_t)g_mem->sz) + 1));
 }
 
 /*

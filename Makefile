@@ -6,7 +6,7 @@
 #    By: jcarra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/01 00:00:00 by jcarra            #+#    #+#              #
-#    Updated: 2017/04/12 16:51:04 by jcarra           ###   ########.fr        #
+#    Updated: 2017/04/25 14:57:22 by mrajaona         ###   ########.fr        #
 #                                                                              #
 #  **************************************************************************  #
 
@@ -22,6 +22,8 @@ SRC		=   ft_putstr.c \
             mem.c \
             malloc.c \
             show_alloc_mem.c \
+			realloc.c \
+			realloc_tools.c \
             free.c
 
 DIRSRC		=	sources/
@@ -48,7 +50,7 @@ $(NAME)		:	.hide
 
 %.o		:	%.c
 			@$(CC) -o $@ -c $< $(CFLAGS)
-			@$(ECHO) '- \b> \033[36m$@\033[0m\n'
+			@$(ECHO) '> \033[36m$@\033[0m\n'
 
 .hide		:	$(OBJS)
 			@touch .hide

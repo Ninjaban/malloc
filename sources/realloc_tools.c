@@ -6,7 +6,7 @@
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/25 11:34:15 by mrajaona          #+#    #+#             */
-/*   Updated: 2017/04/25 13:26:54 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/25 15:09:58 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,22 @@ char			ft_zone_fit(size_t size, t_zone *zone)
 	head = ft_fetch_head(zone);
 	return (size <= (head->size - (size_t)(zone->addr - head->zones->addr)) ?
 			TRUE : FALSE);
+}
+
+/*
+** Copie une zone memoire de taille n
+*/
+void			*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	unsigned char		*d;
+	const unsigned char	*s;
+
+	d = dst;
+	s = src;
+	while (n)
+	{
+		*(d + n - 1) = *(s + n - 1);
+		n--;
+	}
+	return (dst);
 }
