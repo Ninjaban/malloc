@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:48:00 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/25 11:48:00 by mrajaona         ###   ########.fr       */
+/*   Updated: 2017/04/25 15:13:04 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ void				show_alloc_mem(void);
 t_zone				*ft_search_zone(t_zone *zones, void *ptr);
 t_zone				*ft_fetch_zone(void *addr);
 char				ft_zone_fit(size_t size, t_zone *zone);
+void				*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif
