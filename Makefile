@@ -48,7 +48,7 @@ $(NAME)		:	.hide
 
 %.o		:	%.c
 			@$(CC) -o $@ -c $< $(CFLAGS)
-			@$(ECHO) '-> \033[36m$@\033[0m\n'
+			@$(ECHO) '- \b> \033[36m$@\033[0m\n'
 
 .hide		:	$(OBJS)
 			@touch .hide

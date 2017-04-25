@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:48:00 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/12 09:48:00 by jcarra           ###   ########.fr       */
+/*   Updated: 2017/04/25 11:48:00 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 **  Structure contenant l'addresse et la taille d'une zone mémoire allouée
 **
 ** VARIABLES
-**	void*			addr		addresse du début de la mémoirev réservée
+**	void*			addr		addresse du début de la mémoire réservée
 **	int				size		taille de la zone
 **	void*			next		addresse de la prochaine structure
 */
@@ -124,5 +124,8 @@ void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
 void				show_alloc_mem(void);
 
+t_zone				*ft_search_zone(t_zone *zones, void *ptr);
+t_zone				*ft_fetch_zone(void *addr);
+char				ft_zone_fit(size_t size, t_zone *zone);
 
 #endif
