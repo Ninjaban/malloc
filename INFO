@@ -1,0 +1,26 @@
+/*
+** Fonctions autorisees :
+**
+** void *mmap(void *addr, size_t len, int prot, int flags, int fd, off_t offset) (2)
+** 	reclamer des zones memoire au systeme
+** int munmap(void *addr, size_t len) (2)
+** 	rendre des zones memoire au systeme
+** int getpagesize() (3)
+** 	nombre de bytes de la page
+** int getrlimit(int resource, struct rlimit *rlim) (2)
+** 	recupere les limites de consommation d'une ressource
+** fonctions autorisees libft (sauf free et malloc)
+** <pthread.h>
+*/
+
+PLAGE = ce qu'on alloue
+PAGE = alloue par mmap = 4096
+
+PLAGE1_HEAD > pointeur glob
+	t_head page : next, size (sans header), zone
+		t_zone zone : addr, size, next
+zone1
+zone2
+...
+PLAGE1_END = page_start + sz (- HEADER ?)
+	-> addr PAGE2_HEAD

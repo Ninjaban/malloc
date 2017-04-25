@@ -12,8 +12,6 @@
 
 #include "malloc.h"
 
-#include <stdio.h>
-
 void			ft_print_total(size_t total)
 {
 	ft_putstr("Total : ");
