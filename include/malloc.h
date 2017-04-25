@@ -29,21 +29,6 @@
 # include <sys/mman.h>
 
 /*
-** STRUCTURE :: sys
-**  Structure d'information utilisée par toute la lib
-**
-** VARIABLES
-**	void*			addr		addresse du début de la mémoire réservée
-**	int				sz			retour de getpagesize()
-*/
-
-typedef struct		s_mem
-{
-	int				sz;
-	void			*addr;
-}					t_mem;
-
-/*
 ** STRUCTURE :: zone
 **  Structure contenant l'addresse et la taille d'une zone mémoire allouée
 **
@@ -57,7 +42,7 @@ typedef struct		s_zone
 {
 	void			*addr;
 	size_t			size;
-	void			*next;
+	struct s_zone	*next;
 }					t_zone;
 
 /*
@@ -72,11 +57,26 @@ typedef struct		s_zone
 
 typedef struct		s_head
 {
-	void			*addr;
-	struct s_head	*next;
 	size_t			size;
 	t_zone			*zones;
+	struct s_head	*next;
 }					t_head;
+
+/*
+** STRUCTURE :: sys
+**  Structure d'information utilisée par toute la lib
+**
+** VARIABLES
+**	void*			addr		addresse du début de la mémoire réservée
+**	int				sz			retour de getpagesize()
+*/
+
+typedef struct		s_mem
+{
+	int				sz;
+	t_head			*addr;
+}					t_mem;
+
 /*
 ** GLOBAL
 */
@@ -100,23 +100,29 @@ extern t_mem		*g_mem;
 **  SMALL_MAX		taille maximum d'un SMALL pour une allocation de SMALL_ZONE
 */
 
-# define HEADER		8
-# define TINY_ZONE	g_mem->sz
-# define SMALL_ZONE	TINY_ZONE * 100
-# define TINY_MAX	((TINY_ZONE - HEADER * 2) / 100)
-# define SMALL_MAX	TINY_ZONE
+# define HEADER		(size_t)24
+# define TINY_ZONE	64
+# define SMALL_ZONE	(TINY_ZONE * 100)
+/*# define SMALL_ZONE	TINY_ZONE * 100*/
+# define TINY_MAX	(TINY_ZONE * 100)
+# define SMALL_MAX	(SMALL_ZONE * 100)
 
 /*
 ** PROTOTYPES
 */
 
+void				ft_putchar(char c);
+void				ft_putstr(char *str);
+void				ft_putnbr_sizet(size_t nbr);
+void				ft_print_address(size_t addr);
+
 t_zone				*ft_mem_get_zone(void *addr);
 size_t				ft_mem_get_size(void *addr);
 t_mem				*ft_mem_init(void);
 void				free(void *ptr);
-void				*ft_malloc(size_t size);
+void				*malloc(size_t size);
 void				*realloc(void *ptr, size_t size);
-void				show_alloc_mem();
+void				show_alloc_mem(void);
 
 
 #endif
