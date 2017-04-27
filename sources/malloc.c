@@ -147,6 +147,35 @@ static void		*ft_newhead(void *addr, size_t size, size_t zonelen)
 }
 
 /*
+**	Déplace un header de zone @zone une case plus loin.
+*/
+
+static void		ft_moveheaderzone(t_zone *zone, t_zone *next)
+{
+	void	*ptr;
+	size_t	len;
+
+	ptr = zone->addr;
+	len = zone->size;
+	zone = zone + 1;
+	zone->size = len;
+	zone->addr = ptr;
+	zone->next = next;
+}
+
+/*
+**	Déplace tout les maillon récursivement une case plus loin de partant du
+**	dernier header de zone et en remontant jusqu'au premier header utilisé.
+*/
+
+static void		ft_moveheaderzonerec(t_zone *zone)
+{
+	if (zone->next)
+		ft_moveheaderzonerec(zone->next);
+	ft_moveheaderzone(zone, ((zone->next) ? zone->next + 1 : NULL));
+}
+
+/*
 **	Crée une nouvelle zone dont le header se trouvera après le header @ztmp, la
 **	zone de l'utilisateur se trouvera à l'adresse @ptr et sa taille sera @len.
 **
@@ -168,8 +197,9 @@ static void		ft_structzone(t_zone *ztmp, void *ptr, size_t len)
 {
 	t_zone		*zone;
 
+	ft_moveheaderzonerec(ztmp->next);
 	zone = ft_newzone(ztmp + 1, ptr, len);
-	zone->next = ztmp->next;
+	zone->next = ztmp->next + 1;
 	ztmp->next = zone;
 }
 

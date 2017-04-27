@@ -49,17 +49,19 @@ t_zone			*ft_search_zone(t_zone *zones, void *ptr)
 void			ft_clear_zone(t_head *head, t_zone *zone)
 {
 	if (head->zones == zone && !zone->next)
+	{
 		head->zones = NULL;
-	else
-		while (zone->next)
-			if (!zone->next->next)
-				zone->next = NULL;
-			else
-			{
-				zone->addr = zone->next->addr;
-				zone->size = zone->next->size;
-				zone = zone->next;
-			}
+		return ;
+	}
+	while (zone->next)
+		if (!zone->next->next)
+			zone->next = NULL;
+		else
+		{
+			zone->addr = zone->next->addr;
+			zone->size = zone->next->size;
+			zone = zone->next;
+		}
 }
 
 /*

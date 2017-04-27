@@ -19,11 +19,11 @@ int	main(void)
 	char	*addr;
 
 	i = 1;
-	while (i < 1024)
+	while (i < 1024 * 100)
 	{
-		addr = malloc(1024);
-		addr[0] = 42;
-		free(addr);
+//		addr = malloc(1024);
+//		addr[0] = 42;
+//		free(addr);
 		i++;
 	}
 	return (0);
