@@ -84,7 +84,7 @@ static void		*ft_getnextzone(t_head *addr, size_t len)
 				return (zone->next->addr + zone->next->size);
 			}
 			else if (!zone->next && len + sizeof(t_zone) <=
-			(size_t)((zone->addr + zone->size) - (void *)(zone + 1)))
+			(size_t)((zone->addr) - (void *)(zone + 1)))
 			{
 				return (zone->addr - len);
 			}
@@ -133,6 +133,7 @@ static void		*ft_newhead(void *addr, size_t size, size_t zonelen)
 	t_head		*head;
 	t_head		*tmp;
 
+	FT_DEBUG("PLAGE START = %p PLAGE END = %p", addr, addr + size);
 	head = addr;
 	head->size = size;
 	head->next = NULL;
