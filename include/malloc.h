@@ -28,6 +28,11 @@
 # include <stdlib.h>
 # include <sys/mman.h>
 
+#include <stdio.h>			/* |printf()|, |fprintf()| */
+#include <inttypes.h>		/* |PRIu64| */
+#include <stdarg.h>			/* |__VA_ARGS__| */
+#include <stdint.h>			/* |uint64_t| */
+
 /*
 ** STRUCTURE :: zone
 **  Structure contenant l'addresse et la taille d'une zone mémoire allouée
@@ -103,9 +108,32 @@ extern t_mem		*g_mem;
 # define HEADER		(size_t)24
 # define TINY_ZONE	64
 # define SMALL_ZONE	(TINY_ZONE * 100)
-/*# define SMALL_ZONE	TINY_ZONE * 100*/
 # define TINY_MAX	(TINY_ZONE * 100)
 # define SMALL_MAX	(SMALL_ZONE * 100)
+
+/*
+** LOG FUNCTION
+*/
+#define FT_DEBUG(in_context, ...)													\
+	do {																			\
+		(void) fprintf (stderr, "DEBUG:%s:%" PRIu64 ":%s: " in_context "\n",		\
+					__FILE__, (uint64_t)__LINE__, __func__,							\
+					__VA_ARGS__);													\
+	} while (0)
+
+#define FT_WARNING(in_context, ...)													\
+	do {																			\
+	(void) fprintf (stderr, "WARNING:%s:%" PRIu64 ":%s: " in_context "\n",			\
+					__FILE__, (uint64_t)__LINE__, __func__,							\
+					__VA_ARGS__);													\
+	} while (0)
+
+#define FT_ERROR(in_context, ...)													\
+	do {																			\
+	(void) fprintf (stderr, "ERROR:%s:%" PRIu64 ":%s: " in_context "\n",			\
+					__FILE__, (uint64_t)__LINE__, __func__,							\
+					__VA_ARGS__);													\
+	} while (0)
 
 /*
 ** PROTOTYPES

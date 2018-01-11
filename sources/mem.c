@@ -60,9 +60,11 @@ t_mem		*ft_mem_init(void)
 {
 	t_mem	*mem;
 
+	FT_DEBUG("Start %s", "");
 	mem = mmap(0, (size_t)getpagesize(), PROT_READ | PROT_WRITE,
 				MAP_PRIVATE | MAP_ANON, -1, 0);
 	mem->addr = NULL;
 	mem->sz = getpagesize();
+	FT_DEBUG("End %s", "");
 	return (mem);
 }

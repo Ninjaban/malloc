@@ -30,9 +30,13 @@ t_zone			*ft_search_zone(t_zone *zones, void *ptr)
 	while (zone)
 	{
 		if (zone->addr == ptr)
+		{
+			FT_DEBUG("Zone %p Addr %p Next %p Ptr %p", zone, zone->addr, zone->next, ptr);
 			return (zone);
+		}
 		zone = zone->next;
 	}
+	FT_DEBUG("End %s", "Not found");
 	return (NULL);
 }
 
@@ -83,6 +87,7 @@ void			ft_delete_head(t_head *head)
 			tmp = tmp->next;
 		tmp->next = head->next;
 	}
+	FT_DEBUG("MUNMAP head %p", head);
 	munmap(head, head->size);
 }
 
@@ -106,11 +111,13 @@ void			free(void *ptr)
 
 	if (!ptr || !g_mem)
 		return ;
+	FT_DEBUG("Free %p", ptr);
 	head = g_mem->addr;
 	while (head)
 	{
 		if ((zone = ft_search_zone(head->zones, ptr)))
 		{
+			FT_DEBUG("Clear zone %p", zone);
 			ft_clear_zone(head, zone);
 			if (!head->zones)
 				ft_delete_head(head);
@@ -123,4 +130,5 @@ void			free(void *ptr)
 		}
 		head = head->next;
 	}
+	FT_WARNING("End %s", "Not found");
 }

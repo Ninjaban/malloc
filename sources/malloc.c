@@ -31,10 +31,10 @@ t_mem		*g_mem = NULL;
 
 static size_t	ft_getsize(size_t len)
 {
-	if (len <= TINY_ZONE)
+	if (len <= TINY_MAX)
 		return ((size_t)g_mem->sz *
 				((TINY_ZONE * 100 + HEADER * 101) / g_mem->sz + 1));
-	else if (len <= SMALL_ZONE)
+	else if (len <= SMALL_MAX)
 		return ((size_t)g_mem->sz *
 				((SMALL_ZONE * 100 + HEADER * 101) / g_mem->sz + 1));
 	else
@@ -80,7 +80,9 @@ static void		*ft_getnextzone(t_head *addr, size_t len)
 		{
 			if (zone->next && len <=
 				(size_t)(zone->addr - (zone->next->addr + zone->next->size)))
+			{
 				return (zone->next->addr + zone->next->size);
+			}
 			else if (!zone->next && len + sizeof(t_zone) <=
 			(size_t)((zone->addr + zone->size) - (void *)(zone + 1)))
 			{
@@ -109,6 +111,7 @@ static t_zone	*ft_newzone(void *headaddr, void *addr, size_t size)
 	zone->size = size;
 	zone->addr = addr;
 	zone->next = NULL;
+	FT_DEBUG("Zone %p Size %" PRIu32 " Addr %p Next %p", zone, (uint32_t)zone->size, zone->addr, zone->next);
 	return (zone);
 }
 
@@ -170,9 +173,12 @@ static void		ft_moveheaderzone(t_zone *zone, t_zone *next)
 
 static void		ft_moveheaderzonerec(t_zone *zone)
 {
-	if (zone->next)
-		ft_moveheaderzonerec(zone->next);
-	ft_moveheaderzone(zone, ((zone->next) ? zone->next + 1 : NULL));
+	if (zone)
+	{
+		if (zone->next)
+			ft_moveheaderzonerec(zone->next);
+		ft_moveheaderzone(zone, ((zone->next) ? zone->next + 1 : NULL));
+	}
 }
 
 /*
@@ -199,7 +205,7 @@ static void		ft_structzone(t_zone *ztmp, void *ptr, size_t len)
 
 	ft_moveheaderzonerec(ztmp->next);
 	zone = ft_newzone(ztmp + 1, ptr, len);
-	zone->next = ztmp->next + 1;
+	zone->next = (ztmp->next) ? ztmp->next + 1 : NULL;
 	ztmp->next = zone;
 }
 
@@ -227,8 +233,11 @@ static void		ft_addzone(t_head *addr, void *ptr, size_t len)
 		ztmp = tmp->zones;
 		while (ztmp)
 		{
-			if (ztmp->addr - ((ztmp->next) ? ztmp->next->size : len) == ptr)
-				return ft_structzone(ztmp, ptr, len);
+			if (((ztmp->next) ? ztmp->next->addr + ztmp->next->size : ztmp->addr - len) == ptr)
+			{
+				ft_structzone(ztmp, ptr, len);
+				return ;
+			}
 			ztmp = ztmp->next;
 		}
 		tmp = tmp->next;
