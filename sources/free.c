@@ -41,34 +41,6 @@ t_zone			*ft_search_zone(t_zone *zones, void *ptr)
 }
 
 /*
-**	supprime le header de zone @zone dans la plage @head.
-**
-**	Afin d'évité les trous entre les headers de zone, remonte d'un cran les
-**	informations des header suivant.
-**
-**	@param head
-**	@param zone
-*/
-
-void			ft_clear_zone(t_head *head, t_zone *zone)
-{
-	if (head->zones == zone && !zone->next)
-	{
-		head->zones = NULL;
-		return ;
-	}
-	while (zone->next)
-		if (!zone->next->next)
-			zone->next = NULL;
-		else
-		{
-			zone->addr = zone->next->addr;
-			zone->size = zone->next->size;
-			zone = zone->next;
-		}
-}
-
-/*
 **	Delete la plage @head.
 **
 **	@param head
@@ -90,6 +62,34 @@ void			ft_delete_head(t_head *head)
 	FT_DEBUG("MUNMAP head %p", head);
 	if (munmap(head, head->size) == -1)
 		FT_ERROR("munmap() failed %s", "");
+}
+
+/*
+**	supprime le header de zone @zone dans la plage @head.
+**
+**	Afin d'évité les trous entre les headers de zone, remonte d'un cran les
+**	informations des header suivant.
+**
+**	@param head
+**	@param zone
+*/
+
+void			ft_clear_zone(t_head *head, t_zone *zone)
+{
+	if (head->zones == zone && !zone->next)
+	{
+		ft_delete_head(head);
+		return ;
+	}
+	while (zone->next)
+		if (!zone->next->next)
+			zone->next = NULL;
+		else
+		{
+			zone->addr = zone->next->addr;
+			zone->size = zone->next->size;
+			zone = zone->next;
+		}
 }
 
 /*
@@ -120,8 +120,6 @@ void			free(void *ptr)
 		{
 			FT_DEBUG("Clear zone %p", zone);
 			ft_clear_zone(head, zone);
-			if (!head->zones)
-				ft_delete_head(head);
 			if (!g_mem->addr)
 			{
 				if (munmap(g_mem, (size_t) g_mem->sz) == -1)
