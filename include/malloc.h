@@ -106,7 +106,7 @@ extern t_mem		*g_mem;
 */
 
 # define HEADER		(size_t)24
-# define TINY_ZONE	64
+# define TINY_ZONE	1024
 # define SMALL_ZONE	(TINY_ZONE * 100)
 # define TINY_MAX	(TINY_ZONE * 100)
 # define SMALL_MAX	(SMALL_ZONE * 100)
