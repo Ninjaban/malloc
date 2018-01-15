@@ -22,10 +22,10 @@ t_zone			*ft_fetch_zone(void *addr)
 	t_head		*head;
 	t_zone		*zone;
 
-	if (!addr || !g_mem)
+	if (!addr || g_mem == NONE)
 		return (NULL);
 	head = g_mem->addr;
-	while (head)
+	while (head != NONE)
 	{
 		if ((zone = ft_search_zone(head->zones, addr)))
 			return (zone);
@@ -44,10 +44,10 @@ static t_head	*ft_fetch_head(t_zone *zone)
 	t_head		*head;
 	t_zone		*z;
 
-	if (!zone || !g_mem)
+	if (!zone || g_mem == NONE)
 		return (NULL);
 	head = g_mem->addr;
-	while (head)
+	while (head != NONE)
 	{
 		if ((z = ft_search_zone(head->zones, zone->addr)))
 			return (head);
@@ -66,7 +66,7 @@ char			ft_zone_fit(size_t size, t_zone *zone)
 
 	if (size <= zone->size)
 		return (TRUE);
-	if (zone->next)
+	if (zone->next != NONE)
 		return (size <= (size_t)(zone->next->addr - zone->addr) ? TRUE : FALSE);
 	head = ft_fetch_head(zone);
 	return (size <= (head->size - (size_t)(zone->addr - head->zones->addr)) ?
@@ -86,6 +86,7 @@ void			*ft_memcpy(void *dst, const void *src, size_t n)
 	s = src;
 	while (n)
 	{
+		FT_DEBUG("n = %zu", n);
 		*(d + n - 1) = *(s + n - 1);
 		n--;
 	}

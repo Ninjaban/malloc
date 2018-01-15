@@ -18,8 +18,10 @@ static void	*realloc_copy(void *ptr, size_t size, size_t n)
 {
 	void *naddr;
 
+	FT_DEBUG("Start %s", "");
 	naddr = malloc(size);
 	ft_memcpy(naddr, ptr, n);
+	FT_DEBUG("End %s", "");
 	return (naddr);
 }
 
@@ -32,6 +34,7 @@ static void	*realloc_exec(void *ptr, size_t size)
 	t_zone	*cursor;
 	void	*addr;
 
+	FT_DEBUG("Start %s", "");
 	cursor = ft_fetch_zone(ptr);
 	if (ft_zone_fit(size, cursor))
 	{
@@ -44,6 +47,7 @@ static void	*realloc_exec(void *ptr, size_t size)
 		free(cursor->addr);
 		cursor->addr = addr;
 	}
+	FT_DEBUG("End %s", "");
 	return (addr);
 }
 
@@ -55,14 +59,17 @@ void		*realloc(void *ptr, size_t size)
 {
 	void	*new_zone;
 
+	FT_DEBUG("Start %s", "");
 	if (!size)
 	{
 		free(ptr);
+		FT_DEBUG("End %s", "");
 		return (NULL);
 	}
 	if (!ptr)
 		new_zone = malloc(size);
 	else
 		new_zone = realloc_exec(ptr, size);
+	FT_DEBUG("End %s", "");
 	return (new_zone);
 }

@@ -16,7 +16,7 @@
 **	Initialise la variable global g_mem à NULL par défault
 */
 
-t_mem		*g_mem = NULL;
+t_mem		*g_mem = NONE;
 
 /*
 **	Récupère la taille en octets de mémoire à alouer.
@@ -52,9 +52,13 @@ static size_t	ft_getsizeless(t_head *addr)
 	t_zone	*zone;
 
 	zone = addr->zones;
-	while (zone->next)
-		zone = zone->next;
-	return ((size_t)(zone->addr - (void *)(zone + 1)));
+	if (zone != NONE)
+	{
+		while (zone->next != NONE)
+			zone = zone->next;
+		return ((size_t) (zone->addr - (void *) (zone + 1)));
+	}
+	return (addr->size);
 }
 
 /*
@@ -76,21 +80,21 @@ static void		*ft_getnextzone(t_head *addr, size_t len)
 
 	zone = addr->zones;
 	if (addr->size > len && ft_getsizeless(addr) >= sizeof(t_zone))
-		while (zone)
+		while (zone != NONE)
 		{
-			if (zone->next && len <=
+			if (zone->next != NONE && len <=
 				(size_t)(zone->addr - (zone->next->addr + zone->next->size)))
 			{
 				return (zone->next->addr + zone->next->size);
 			}
-			else if (!zone->next && len + sizeof(t_zone) <=
+			else if (zone->next == NONE && len + sizeof(t_zone) <=
 			(size_t)((zone->addr) - (void *)(zone + 1)))
 			{
 				return (zone->addr - len);
 			}
 			zone = zone->next;
 		}
-	return ((addr->next) ? ft_getnextzone(addr->next, len) : NULL);
+	return ((addr->next != NONE) ? ft_getnextzone(addr->next, len) : NULL);
 }
 
 /*
@@ -110,7 +114,7 @@ static t_zone	*ft_newzone(void *headaddr, void *addr, size_t size)
 	zone = (t_zone *)headaddr;
 	zone->size = size;
 	zone->addr = addr;
-	zone->next = NULL;
+	zone->next = NONE;
 	FT_DEBUG("Zone %p Size %" PRIu32 " Addr %p Next %p", zone, (uint32_t)zone->size, zone->addr, zone->next);
 	return (zone);
 }
@@ -136,12 +140,12 @@ static void		*ft_newhead(void *addr, size_t size, size_t zonelen)
 	FT_DEBUG("PLAGE START = %p PLAGE END = %p", addr, addr + size);
 	head = addr;
 	head->size = size;
-	head->next = NULL;
+	head->next = NONE;
 	head->zones = ft_newzone(addr + sizeof(t_head), addr + size - zonelen, zonelen);
-	if (g_mem->addr)
+	if (g_mem->addr != NONE)
 	{
 		tmp = g_mem->addr;
-		while (tmp->next)
+		while (tmp->next != NONE)
 			tmp = tmp->next;
 		tmp->next = head;
 	}
@@ -174,11 +178,11 @@ static void		ft_moveheaderzone(t_zone *zone, t_zone *next)
 
 static void		ft_moveheaderzonerec(t_zone *zone)
 {
-	if (zone)
+	if (zone != NONE)
 	{
-		if (zone->next)
+		if (zone->next != NONE)
 			ft_moveheaderzonerec(zone->next);
-		ft_moveheaderzone(zone, ((zone->next) ? zone->next + 1 : NULL));
+		ft_moveheaderzone(zone, ((zone->next != NONE) ? zone->next + 1 : NONE));
 	}
 }
 
@@ -206,8 +210,9 @@ static void		ft_structzone(t_zone *ztmp, void *ptr, size_t len)
 
 	ft_moveheaderzonerec(ztmp->next);
 	zone = ft_newzone(ztmp + 1, ptr, len);
-	zone->next = (ztmp->next) ? ztmp->next + 1 : NULL;
+	zone->next = (ztmp->next != NONE) ? ztmp->next + 1 : NONE;
 	ztmp->next = zone;
+	FT_DEBUG("zone %p ptr %p len %zu ptr + len %p", zone, zone->addr, zone->size, zone->addr + zone->size);
 }
 
 /*
@@ -229,12 +234,12 @@ static void		ft_addzone(t_head *addr, void *ptr, size_t len)
 	t_zone		*ztmp;
 
 	tmp = addr;
-	while (tmp)
+	while (tmp != NONE)
 	{
 		ztmp = tmp->zones;
-		while (ztmp)
+		while (ztmp != NONE)
 		{
-			if (((ztmp->next) ? ztmp->next->addr + ztmp->next->size : ztmp->addr - len) == ptr)
+			if (((ztmp->next != NONE) ? ztmp->next->addr + ztmp->next->size : ztmp->addr - len) == ptr)
 			{
 				ft_structzone(ztmp, ptr, len);
 				return ;
@@ -268,18 +273,24 @@ void			*malloc(size_t len)
 	void		*plage;
 	size_t		size;
 
-	if (!g_mem)
+	FT_DEBUG("len %zu", len);
+	if (g_mem == NONE)
 		g_mem = ft_mem_init();
-	if (g_mem->addr && (addr = ft_getnextzone(g_mem->addr, len)))
+	if (g_mem->addr != NONE && (addr = ft_getnextzone(g_mem->addr, len)))
 			ft_addzone(g_mem->addr, addr, len);
 	else
 	{
 		size = ft_getsize(len);
+		FT_DEBUG("mmap() size %zu", size);
 		if ((plage = mmap(0, size, PROT_READ | PROT_WRITE,
 						  MAP_PRIVATE | MAP_ANON, -1, 0)) != (void *)-1)
+		{
+			FT_DEBUG("plage size %zu", size);
 			return (ft_newhead(plage, size, len));
+		}
 		else
 			return (NULL);
 	}
+	FT_DEBUG("End %s", "");
 	return (addr);
 }

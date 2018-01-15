@@ -96,6 +96,8 @@ extern t_mem		*g_mem;
 # define TRUE		1
 # define FALSE		0
 
+# define NONE		((void *)-1)
+
 /*
 ** DEFINES :: PAGE_SIZES
 **  HEADER			sizeof(void*). Taille des zones réservées

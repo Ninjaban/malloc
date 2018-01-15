@@ -13,7 +13,6 @@ int main()
 	while (i < 1024)
 	{
 		addr = (char*)malloc(1024);
-		FT_DEBUG("addr %p", addr);
 		addr[0] = 42;
 		i++;
 	}
