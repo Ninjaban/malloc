@@ -60,14 +60,12 @@ void			ft_clear_zone(t_head *head, t_zone *zone)
 	}
 	while (zone->next != NONE)
 	{
-		if (!zone->next->next)
-			zone->next = NULL;
+		zone->addr = zone->next->addr;
+		zone->size = zone->next->size;
+		if (zone->next->next == NONE)
+			zone->next = NONE;
 		else
-		{
-			zone->addr = zone->next->addr;
-			zone->size = zone->next->size;
-		}
-		zone = zone->next;
+			zone = zone->next;
 	}
 }
 
@@ -91,8 +89,8 @@ void			ft_delete_head(t_head *head)
 		FT_DEBUG("head %p next %p", head, head->next);
 		tmp->next = head->next;
 	}
-	FT_DEBUG("MUNMAP head %p size %zu", head, head->size);
-	if (munmap(head, head->size) == -1)
+	FT_DEBUG("---   MUNMAP() PLAGE START = %p PLAGE END = %p size %zu", head, (void *)head + head->size, head->size);
+	if (munmap((void *)head, head->size) == -1)
 		FT_ERROR("munmap() failed %s", "");
 }
 

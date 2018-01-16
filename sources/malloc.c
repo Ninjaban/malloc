@@ -137,7 +137,7 @@ static void		*ft_newhead(void *addr, size_t size, size_t zonelen)
 	t_head		*head;
 	t_head		*tmp;
 
-	FT_DEBUG("PLAGE START = %p PLAGE END = %p", addr, addr + size);
+	FT_DEBUG("---   MMAP() PLAGE START = %p PLAGE END = %p size %zu", addr, addr + size, size);
 	head = addr;
 	head->size = size;
 	head->next = NONE;
