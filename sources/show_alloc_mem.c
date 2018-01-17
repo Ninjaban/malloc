@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:13:00 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/25 15:43:35 by mrajaona         ###   ########.fr       */
+/*   Updated: 2018/01/17 16:18:46 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			ft_print_zones(t_zone *zones, size_t *total)
 	t_zone		*zone;
 
 	zone = zones;
-	if (zone->next)
+	if (zone->next != NONE)
 		ft_print_zones(zone->next, &(*total));
 	ft_print_address((size_t)zone->addr);
 	ft_putstr(" - ");
@@ -39,16 +39,16 @@ void			ft_print_head(t_head *head, size_t *total)
 {
 	char		*str;
 
-	if (head->size / g_mem->sz <= TINY_ZONE)
+	if (head->size / g_mem->sz == (TINY_MAX + HEADER_MAX) / g_mem->sz + 1)
 		str = "TINY : ";
-	else if (head->size / g_mem->sz <= SMALL_ZONE)
+	else if (head->size / g_mem->sz == (SMALL_MAX + HEADER_MAX) / g_mem->sz + 1)
 		str = "SMALL : ";
 	else
 		str = "LARGE : ";
 	ft_putstr(str);
 	ft_print_address((size_t)head);
 	ft_putchar('\n');
-	if (head->zones)
+	if (head->zones != NONE)
 		ft_print_zones(head->zones, &(*total));
 }
 
@@ -57,14 +57,14 @@ void			show_alloc_mem(void)
 	t_head		*head;
 	size_t		total;
 
-	if (!g_mem)
+	if (g_mem == NONE)
 	{
 		ft_print_total(0);
 		return ;
 	}
 	head = g_mem->addr;
 	total = 0;
-	while (head)
+	while (head != NONE)
 	{
 		ft_print_head(head, &total);
 		head = head->next;
