@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:48:00 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/25 15:13:04 by mrajaona         ###   ########.fr       */
+/*   Updated: 2018/01/17 14:58:18 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,14 @@ extern t_mem		*g_mem;
 **  SMALL_MAX		taille maximum d'un SMALL pour une allocation de SMALL_ZONE
 */
 
+# define MULTI		23
+
 # define HEADER		(size_t)24
+# define HEADER_MAX	(size_t)(HEADER * (MULTI + 1))
 # define TINY_ZONE	1024
-# define SMALL_ZONE	(TINY_ZONE * 100)
-# define TINY_MAX	(TINY_ZONE * 100)
-# define SMALL_MAX	(SMALL_ZONE * 100)
+# define SMALL_ZONE	(TINY_ZONE * MULTI)
+# define TINY_MAX	(TINY_ZONE * MULTI)
+# define SMALL_MAX	(SMALL_ZONE * MULTI)
 
 /*
 ** LOG FUNCTION

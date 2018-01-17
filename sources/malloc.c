@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:13:00 by jcarra            #+#    #+#             */
-/*   Updated: 2017/04/12 09:13:00 by jcarra           ###   ########.fr       */
+/*   Updated: 2018/01/17 15:18:01 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ static size_t	ft_getsize(size_t len)
 {
 	if (len <= TINY_MAX)
 		return ((size_t)g_mem->sz *
-				((TINY_ZONE * 100 + HEADER * 101) / g_mem->sz + 1));
+				((TINY_MAX + HEADER_MAX) / g_mem->sz + 1));
 	else if (len <= SMALL_MAX)
 		return ((size_t)g_mem->sz *
-				((SMALL_ZONE * 100 + HEADER * 101) / g_mem->sz + 1));
+				((SMALL_MAX + HEADER_MAX) / g_mem->sz + 1));
 	else
-		return ((size_t)g_mem->sz * (((len + HEADER * 2) / (size_t)g_mem->sz) + 1));
+		return ((size_t)g_mem->sz * (((len + HEADER * 2) /
+				(size_t)g_mem->sz) + 1));
 }
 
 /*
@@ -56,7 +57,7 @@ static size_t	ft_getsizeless(t_head *addr)
 	{
 		while (zone->next != NONE)
 			zone = zone->next;
-		return ((size_t) (zone->addr - (void *) (zone + 1)));
+		return ((size_t)(zone->addr - (void *)(zone + 1)));
 	}
 	return (addr->size);
 }
@@ -79,6 +80,8 @@ static void		*ft_getnextzone(t_head *addr, size_t len)
 	t_zone	*zone;
 
 	zone = addr->zones;
+	if (addr->zones == NONE && addr->size - HEADER_MAX >= len)
+		return ((void *)addr + addr->size - len);
 	if (addr->size > len && ft_getsizeless(addr) >= sizeof(t_zone))
 		while (zone != NONE)
 		{
@@ -115,7 +118,6 @@ static t_zone	*ft_newzone(void *headaddr, void *addr, size_t size)
 	zone->size = size;
 	zone->addr = addr;
 	zone->next = NONE;
-	FT_DEBUG("Zone %p Size %" PRIu32 " Addr %p Next %p", zone, (uint32_t)zone->size, zone->addr, zone->next);
 	return (zone);
 }
 
@@ -137,11 +139,11 @@ static void		*ft_newhead(void *addr, size_t size, size_t zonelen)
 	t_head		*head;
 	t_head		*tmp;
 
-	FT_DEBUG("---   MMAP() PLAGE START = %p PLAGE END = %p size %zu", addr, addr + size, size);
 	head = addr;
 	head->size = size;
 	head->next = NONE;
-	head->zones = ft_newzone(addr + sizeof(t_head), addr + size - zonelen, zonelen);
+	head->zones = ft_newzone(addr + sizeof(t_head),
+								addr + size - zonelen, zonelen);
 	if (g_mem->addr != NONE)
 	{
 		tmp = g_mem->addr;
@@ -190,14 +192,14 @@ static void		ft_moveheaderzonerec(t_zone *zone)
 **	Crée une nouvelle zone dont le header se trouvera après le header @ztmp, la
 **	zone de l'utilisateur se trouvera à l'adresse @ptr et sa taille sera @len.
 **
-**	Ajoute ensuite ce header de zone dans la liste des header de zone en fonction
-**	de la position de la zone d'utilisateur:
+**	Ajoute ensuite ce header de zone dans la liste des header de zone en
+**	fonction de la position de la zone d'utilisateur:
 **
 **	Si la zone de l'utilisateur @ptr est la 3eme zone de la plage, alors le
 **	header de zone sera le 3eme de la liste.
 **
-**	Cela permet de garder une liste de header et de zone ordonné et cohérente lors
-**	d'une éventuelle lecture avec show_alloc_mem.
+**	Cela permet de garder une liste de header et de zone ordonné et cohérente
+**	lors d'une éventuelle lecture avec show_alloc_mem.
 **
 **	@param ztmp
 **	@param ptr
@@ -212,7 +214,6 @@ static void		ft_structzone(t_zone *ztmp, void *ptr, size_t len)
 	zone = ft_newzone(ztmp + 1, ptr, len);
 	zone->next = (ztmp->next != NONE) ? ztmp->next + 1 : NONE;
 	ztmp->next = zone;
-	FT_DEBUG("zone %p ptr %p len %zu ptr + len %p", zone, zone->addr, zone->size, zone->addr + zone->size);
 }
 
 /*
@@ -237,9 +238,15 @@ static void		ft_addzone(t_head *addr, void *ptr, size_t len)
 	while (tmp != NONE)
 	{
 		ztmp = tmp->zones;
+		if (tmp->zones == NONE && (void *)tmp + tmp->size - len == ptr)
+		{
+			tmp->zones = ft_newzone((void *)tmp + sizeof(t_head), ptr, len);
+			return ;
+		}
 		while (ztmp != NONE)
 		{
-			if (((ztmp->next != NONE) ? ztmp->next->addr + ztmp->next->size : ztmp->addr - len) == ptr)
+			if (((ztmp->next != NONE) ? ztmp->next->addr + ztmp->next->size :
+					ztmp->addr - len) == ptr)
 			{
 				ft_structzone(ztmp, ptr, len);
 				return ;
@@ -256,13 +263,13 @@ static void		ft_addzone(t_head *addr, void *ptr, size_t len)
 **	Vérifie si une nouvelle zone de taille @len peut etre ajouté dans les plages
 **	déjà crée.
 **
-**	Si oui, appelle addzone(); pour crée une nouvelle zone de taille @len dans les
-**	plages existante.
+**	Si oui, appelle addzone(); pour crée une nouvelle zone de taille @len dans
+**	les plages existante.
 **
-**	Si non, appelle crée une nouvelle plage à l'aide de getsize(); et de mmap();,
+**	Si non, appelle crée une nouvelle plage à l'aide de getsize() et de mmap(),
 **	puis ajoute une header de plage et crée la nouvelle zone à l'aide de
 **	newhead();.
-**	
+**
 **	@param len
 **	@return
 */
@@ -273,24 +280,18 @@ void			*malloc(size_t len)
 	void		*plage;
 	size_t		size;
 
-	FT_DEBUG("len %zu", len);
 	if (g_mem == NONE)
 		g_mem = ft_mem_init();
 	if (g_mem->addr != NONE && (addr = ft_getnextzone(g_mem->addr, len)))
-			ft_addzone(g_mem->addr, addr, len);
+		ft_addzone(g_mem->addr, addr, len);
 	else
 	{
 		size = ft_getsize(len);
-		FT_DEBUG("mmap() size %zu", size);
 		if ((plage = mmap(0, size, PROT_READ | PROT_WRITE,
-						  MAP_PRIVATE | MAP_ANON, -1, 0)) != (void *)-1)
-		{
-			FT_DEBUG("plage size %zu", size);
+							MAP_PRIVATE | MAP_ANON, -1, 0)) != (void *)-1)
 			return (ft_newhead(plage, size, len));
-		}
 		else
 			return (NULL);
 	}
-	FT_DEBUG("End %s", "");
 	return (addr);
 }

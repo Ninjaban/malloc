@@ -86,7 +86,6 @@ void			*ft_memcpy(void *dst, const void *src, size_t n)
 	s = src;
 	while (n)
 	{
-		FT_DEBUG("n = %zu", n);
 		*(d + n - 1) = *(s + n - 1);
 		n--;
 	}
