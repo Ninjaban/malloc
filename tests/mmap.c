@@ -1,6 +1,15 @@
-//
-// Created by Jonathan CARRA on 1/16/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mmap.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcarra <jcarra@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/17 10:09:15 by jcarra            #+#    #+#             */
+/*   Updated: 2018/01/17 11:03:32 by jcarra           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include <sys/time.h>
 #include <sys/resource.h>
@@ -10,7 +19,6 @@
 #include <stdio.h>			/* |printf()| */
 #include <inttypes.h>		/* |PRIu64| */
 #include <stdint.h>			/* |uint64_t| */
-
 
 int		main()
 {
