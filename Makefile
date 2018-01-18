@@ -17,13 +17,15 @@ ifeq ($(HOSTTYPE),)
     HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
-SRC		=   ft_putstr.c \
-            ft_putnbr.c \
+SRC		=   ft_tools_string.c \
+            ft_tools_number.c \
+	    ft_tools_realloc.c \
             mem.c \
             malloc.c \
+	    calloc.c \
             show_alloc_mem.c \
 			realloc.c \
-			realloc_tools.c \
+			reallocf.c \
             free.c
 
 DIRSRC		=	sources/
