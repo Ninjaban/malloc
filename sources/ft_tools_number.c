@@ -21,7 +21,7 @@ static void		ft_putnbr_hexa_single(size_t c)
 		ft_putchar(97 + c - 10);
 }
 
-int				ft_putnbr_hexa(size_t nbr)
+static int		ft_putnbr_hexa(size_t nbr)
 {
 	size_t	max;
 	size_t	value;
