@@ -28,11 +28,6 @@
 # include <stdlib.h>
 # include <sys/mman.h>
 
-#include <stdio.h>			/* |printf()|, |fprintf()| */
-#include <inttypes.h>		/* |PRIu64| */
-#include <stdarg.h>			/* |__VA_ARGS__| */
-#include <stdint.h>			/* |uint64_t| */
-
 /*
 ** STRUCTURE :: zone
 **  Structure contenant l'addresse et la taille d'une zone mémoire allouée
@@ -117,30 +112,6 @@ extern t_mem		*g_mem;
 # define SMALL_MAX	(SMALL_ZONE * MULTI)
 
 /*
-** LOG FUNCTION
-*/
-#define FT_DEBUG(in_context, ...)													\
-	do {																			\
-		(void) fprintf (stderr, "DEBUG:%s:%" PRIu64 ":%s: " in_context "\n",		\
-					__FILE__, (uint64_t)__LINE__, __func__,							\
-					__VA_ARGS__);													\
-	} while (0)
-
-#define FT_WARNING(in_context, ...)													\
-	do {																			\
-	(void) fprintf (stderr, "WARNING:%s:%" PRIu64 ":%s: " in_context "\n",			\
-					__FILE__, (uint64_t)__LINE__, __func__,							\
-					__VA_ARGS__);													\
-	} while (0)
-
-#define FT_ERROR(in_context, ...)													\
-	do {																			\
-	(void) fprintf (stderr, "ERROR:%s:%" PRIu64 ":%s: " in_context "\n",			\
-					__FILE__, (uint64_t)__LINE__, __func__,							\
-					__VA_ARGS__);													\
-	} while (0)
-
-/*
 ** PROTOTYPES
 */
 
@@ -149,17 +120,17 @@ void				ft_putstr(char *str);
 void				ft_putnbr_sizet(size_t nbr);
 void				ft_print_address(size_t addr);
 
-t_zone				*ft_mem_get_zone(void *addr);
-size_t				ft_mem_get_size(void *addr);
-t_mem				*ft_mem_init(void);
-void				free(void *ptr);
-void				*malloc(size_t size);
-void				*realloc(void *ptr, size_t size);
-void				show_alloc_mem(void);
-
 t_zone				*ft_search_zone(t_zone *zones, void *ptr);
 t_zone				*ft_fetch_zone(void *addr);
 char				ft_zone_fit(size_t size, t_zone *zone);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
+t_mem				*ft_mem_init(void);
+
+void				free(void *ptr);
+void				*malloc(size_t size);
+void				*calloc(size_t nmemb, size_t size);
+void				*realloc(void *ptr, size_t size);
+void				*reallocf(void *ptr, size_t size);
+void				show_alloc_mem(void);
 
 #endif

@@ -87,14 +87,10 @@ static void		*ft_getnextzone(t_head *addr, size_t len)
 		{
 			if (zone->next != NONE && len <=
 				(size_t)(zone->addr - (zone->next->addr + zone->next->size)))
-			{
 				return (zone->next->addr + zone->next->size);
-			}
 			else if (zone->next == NONE && len + sizeof(t_zone) <=
 			(size_t)((zone->addr) - (void *)(zone + 1)))
-			{
 				return (zone->addr - len);
-			}
 			zone = zone->next;
 		}
 	return ((addr->next != NONE) ? ft_getnextzone(addr->next, len) : NULL);
@@ -290,8 +286,7 @@ void			*malloc(size_t len)
 		if ((plage = mmap(0, size, PROT_READ | PROT_WRITE,
 							MAP_PRIVATE | MAP_ANON, -1, 0)) != (void *)-1)
 			return (ft_newhead(plage, size, len));
-		else
-			return (NULL);
+		return (NULL);
 	}
 	return (addr);
 }

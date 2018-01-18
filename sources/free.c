@@ -83,8 +83,7 @@ void			ft_delete_head(t_head *head)
 			tmp = tmp->next;
 		tmp->next = head->next;
 	}
-	if (munmap((void *)head, head->size) == -1)
-		FT_ERROR("munmap() failed %s", "");
+	munmap((void *)head, head->size);
 }
 
 /*
@@ -118,8 +117,7 @@ void			free(void *ptr)
 				ft_delete_head(head);
 			if (g_mem->addr == NONE)
 			{
-				if (munmap(g_mem, (size_t)g_mem->sz) == -1)
-					FT_ERROR("munmap() failed %s", "");
+				munmap(g_mem, (size_t)g_mem->sz);
 				g_mem = NONE;
 			}
 			return ;
