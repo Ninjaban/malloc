@@ -6,11 +6,11 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 09:29:00 by jcarra            #+#    #+#             */
-/*   Updated: 2018/01/17 15:06:20 by jcarra           ###   ########.fr       */
+/*   Updated: 2018/01/31 13:10:43 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "internal.h"
 
 /*
 **	Cherche dans une plage un header de zone dont la zone corresponds à @ptr.
@@ -39,6 +39,7 @@ t_zone			*ft_search_zone(t_zone *zones, void *ptr)
 /*
 **	Déplace le header de plage @head en fin de liste.
 */
+
 static void		ft_move_head(t_head *head)
 {
 	t_head		*tmp;
@@ -108,7 +109,7 @@ void			ft_delete_head(t_head *head)
 		if (tmp->zones == NONE)
 		{
 			tmp->next = NONE;
-			munmap((void *) head, head->size);
+			munmap((void *)head, head->size);
 		}
 	}
 }
@@ -126,7 +127,7 @@ void			ft_delete_head(t_head *head)
 **	@param ptr
 */
 
-void			free(void *ptr)
+void			ft_free(void *ptr)
 {
 	t_head	*head;
 	t_zone	*zone;

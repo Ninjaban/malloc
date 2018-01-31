@@ -6,11 +6,11 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 11:31:00 by jcarra            #+#    #+#             */
-/*   Updated: 2018/01/17 15:08:58 by jcarra           ###   ########.fr       */
+/*   Updated: 2018/01/22 09:14:52 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "internal.h"
 
 t_zone		*ft_mem_get_zone(void *addr)
 {

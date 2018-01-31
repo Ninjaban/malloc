@@ -19,14 +19,16 @@ endif
 
 SRC		=   ft_tools_string.c \
             ft_tools_number.c \
-	    ft_tools_realloc.c \
+	        ft_tools_realloc.c \
+	        ft_tools_malloc.c \
             mem.c \
             malloc.c \
-	    calloc.c \
+    	    calloc.c \
             show_alloc_mem.c \
 			realloc.c \
 			reallocf.c \
-            free.c
+            free.c \
+            mutex.c
 
 DIRSRC		=	sources/
 DIRINC		=	include/

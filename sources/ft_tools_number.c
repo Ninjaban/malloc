@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "malloc.h"
+#include "internal.h"
 
 static void		ft_putnbr_hexa_single(size_t c)
 {

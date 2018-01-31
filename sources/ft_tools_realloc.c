@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "internal.h"
 
 /*
 ** Cherche la zone correspondant à l'adresse

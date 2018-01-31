@@ -6,11 +6,11 @@
 /*   By: elemarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 14:20:32 by elemarch          #+#    #+#             */
-/*   Updated: 2018/01/17 15:10:27 by jcarra           ###   ########.fr       */
+/*   Updated: 2018/01/31 13:10:35 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "internal.h"
 
 /*
 **	mnalloc une nouvelle zone puis copie le contenu de ptr dedans
@@ -58,7 +58,7 @@ static void	*realloc_exec(void *ptr, size_t size)
 **	sinon => realloc exec
 */
 
-void		*realloc(void *ptr, size_t size)
+void		*ft_realloc(void *ptr, size_t size)
 {
 	void	*new_zone;
 

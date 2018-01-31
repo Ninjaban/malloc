@@ -6,11 +6,11 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:13:00 by jcarra            #+#    #+#             */
-/*   Updated: 2018/01/17 16:18:46 by jcarra           ###   ########.fr       */
+/*   Updated: 2018/01/31 13:10:39 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "internal.h"
 
 void			ft_print_total(size_t total)
 {
@@ -52,7 +52,7 @@ void			ft_print_head(t_head *head, size_t *total)
 		ft_print_zones(head->zones, &(*total));
 }
 
-void			show_alloc_mem(void)
+void			ft_show_alloc_mem(void)
 {
 	t_head		*head;
 	size_t		total;

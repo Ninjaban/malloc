@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:48:00 by jcarra            #+#    #+#             */
-/*   Updated: 2018/01/31 13:08:14 by jcarra           ###   ########.fr       */
+/*   Updated: 2018/01/31 13:16:00 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,6 @@ typedef struct		s_mem
 {
 	int				sz;
 	t_head			*addr;
-	pthread_mutex_t	mutex_malloc;
-	pthread_mutex_t	mutex_realloc;
-	pthread_mutex_t	mutex_free;
-	pthread_mutex_t	mutex_show;
 }					t_mem;
 
 /*
@@ -136,11 +132,9 @@ t_zone				*ft_newzone(void *headaddr, void *addr, size_t size);
 void				ft_moveheaderzonerec(t_zone *zone);
 void				ft_structzone(t_zone *ztmp, void *ptr, size_t len);
 
-void				free(void *ptr);
-void				*malloc(size_t size);
-void				*calloc(size_t nmemb, size_t size);
-void				*realloc(void *ptr, size_t size);
-void				*reallocf(void *ptr, size_t size);
-void				show_alloc_mem(void);
+void				ft_free(void *ptr);
+void				*ft_malloc(size_t size);
+void				*ft_realloc(void *ptr, size_t size);
+void				ft_show_alloc_mem(void);
 
 #endif
