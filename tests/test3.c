@@ -3,7 +3,7 @@
 //
 
 #include <string.h>
-#include "malloc.h"
+#include "internal.h"
 
 #define M (1024 * 1024)
 

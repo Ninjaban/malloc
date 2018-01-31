@@ -1,4 +1,4 @@
-#include "malloc.h"
+#include "internal.h"
 
 int main() 
 { 

@@ -2,7 +2,7 @@
 // Created by Jonathan CARRA on 1/11/18.
 //
 
-#include "malloc.h"
+#include "internal.h"
 
 int main()
 {

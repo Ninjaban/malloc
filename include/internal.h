@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 09:48:00 by jcarra            #+#    #+#             */
-/*   Updated: 2018/01/17 14:58:18 by jcarra           ###   ########.fr       */
+/*   Updated: 2018/01/31 13:08:14 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/mman.h>
+# include <pthread.h>
 
 /*
 ** STRUCTURE :: zone
@@ -75,6 +76,10 @@ typedef struct		s_mem
 {
 	int				sz;
 	t_head			*addr;
+	pthread_mutex_t	mutex_malloc;
+	pthread_mutex_t	mutex_realloc;
+	pthread_mutex_t	mutex_free;
+	pthread_mutex_t	mutex_show;
 }					t_mem;
 
 /*
@@ -125,6 +130,11 @@ t_zone				*ft_fetch_zone(void *addr);
 char				ft_zone_fit(size_t size, t_zone *zone);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 t_mem				*ft_mem_init(void);
+
+size_t				ft_getsize(size_t len);
+t_zone				*ft_newzone(void *headaddr, void *addr, size_t size);
+void				ft_moveheaderzonerec(t_zone *zone);
+void				ft_structzone(t_zone *ztmp, void *ptr, size_t len);
 
 void				free(void *ptr);
 void				*malloc(size_t size);

@@ -1,5 +1,5 @@
 #include <string.h>
-#include "malloc.h"
+#include "internal.h"
 
 void print(char *s) 
 { 
