@@ -6,7 +6,7 @@
 /*   By: elemarch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 14:20:32 by elemarch          #+#    #+#             */
-/*   Updated: 2018/01/31 13:10:35 by jcarra           ###   ########.fr       */
+/*   Updated: 2018/02/01 11:39:32 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void		*ft_realloc(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
+	if ((int)((void *)size) < 0)
+		return (NULL);
 	if (!ptr)
 		new_zone = malloc(size);
 	else
