@@ -62,6 +62,7 @@ $(NAME)		:	.hide
 			@$(ECHO) '\033[32m>\033[0m $(NAME) : [\033[33mSources\033[0m] ->\033[32m	Ready\n\033[0m'
 
 clean		:
+			@$(RM) test0 test1 test2 test3 test3b test4 test5 test6
 			@$(RM) $(OBJS) .hide
 			@$(ECHO) '\033[31m>\033[0m $(NAME) : \033[31mDirectory cleaned\n\033[0m'
 
@@ -71,6 +72,16 @@ fclean		:	clean
 			@$(ECHO) '\033[31m>\033[0m $(NAME) : \033[31mRemove executable\n\033[0m'
 
 re		:	fclean all
+
+test		:
+			@$(CC) tests/test0.c -o test0 -I ./$(DIRINC)
+			@$(CC) tests/test1.c -o test1 -I ./$(DIRINC)
+			@$(CC) tests/test2.c -o test2 -I ./$(DIRINC)
+			@$(CC) tests/test3.c -o test3 -I ./$(DIRINC)
+			@$(CC) tests/test3b.c -o test3b -I ./$(DIRINC)
+			@$(CC) tests/test4.c -o test4 -I ./$(DIRINC)
+			@$(CC) tests/test5.c -o test5 -I ./$(DIRINC) -L. -lft_malloc
+			@$(CC) tests/test6.c -o test6 -I ./$(DIRINC)
 
 .PHONY		:	all clean fclean re
 
