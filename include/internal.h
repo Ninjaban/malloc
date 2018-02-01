@@ -17,8 +17,8 @@
 ** 	- sz le retour de getPageSize()
 */
 
-#ifndef MALLOC_H
-# define MALLOC_H
+#ifndef INTERNAL_H
+# define INTERNAL_H
 
 /*
 ** INCLUDES
