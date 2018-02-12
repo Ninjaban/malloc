@@ -20,7 +20,8 @@ static void	*realloc_copy(void *ptr, size_t size, size_t n)
 {
 	void *naddr;
 
-	naddr = malloc(size);
+	if (!(naddr = malloc(size)))
+		return (NULL);
 	ft_memcpy(naddr, ptr, n);
 	return (naddr);
 }
@@ -45,7 +46,8 @@ static void	*realloc_exec(void *ptr, size_t size)
 	}
 	else
 	{
-		addr = realloc_copy(ptr, size, cursor->size);
+		if (!(addr = realloc_copy(ptr, size, cursor->size)))
+			return (NULL);
 		free(cursor->addr);
 		cursor->addr = addr;
 	}
@@ -67,8 +69,6 @@ void		*ft_realloc(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
-	if ((int)((void *)size) < 0)
-		return (NULL);
 	if (!ptr)
 		new_zone = malloc(size);
 	else
